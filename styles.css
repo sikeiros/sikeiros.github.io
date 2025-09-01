@@ -266,7 +266,7 @@ html.is-about { font-size: calc(100vw / 61); }   /* bigger number = smaller text
 
 /* Mobile */
 @media (max-width: 700px){
-  html.is-about { font-size: calc(100vw / 50); } /* tweak this too if needed */
+  html.is-about { font-size: calc(100vw / 70); } /* tweak this too if needed */
 }
 
 
