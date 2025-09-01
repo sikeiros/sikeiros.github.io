@@ -48,7 +48,7 @@ a[href]:hover{ color:#1EFFF0; }
 
 
 /* Remove any previous width:100% on nav; we’ll position it instead */
-nav{
+.contacts-nav{
   position: fixed;
   right: var(--nav-right);
   bottom: calc(var(--nav-bottom) + env(safe-area-inset-bottom, 0px)); /* iOS safe area */
@@ -57,7 +57,7 @@ nav{
   padding: 0;
 }
 
-nav ul{
+.contacts-nav ul{
   list-style: none;
   margin: 0;
   padding: 0;
@@ -69,15 +69,15 @@ nav ul{
 }
 
 
-nav a[href]{
+.contacts-nav a[href]{
   background:#1EFFF0;  /* blue by default */
   color:#000;
   padding:.15em .4em;
   transition: background-color .15s ease; /* smooth */
 }
 
-nav a[href]:hover,
-nav a[href]:focus-visible{
+.contacts-nav a[href]:hover,
+.contacts-nav a[href]:focus-visible{
   color:#ffff67;  /* yellow txt on hover */
   
 }
@@ -140,7 +140,7 @@ nav a[href]:focus-visible{
   /* Optional readability tweak */
   body { line-height: 1.45; } /* fixed */
 
-  nav{
+  .contacts-nav{
     position: fixed;
     left: var(--nav-left, 1rem);  /* tweak this to move away from the right edge */
     bottom: calc(var(--nav-bottom, 1rem) + env(safe-area-inset-bottom, 0px));
@@ -151,7 +151,7 @@ nav a[href]:focus-visible{
 
 
   /* stack links one-per-row, still docked bottom-right */
-  nav ul{
+  .contacts-nav ul{
     display: flex;
     flex-direction: column;
     align-items: flex-start;           /* right-align the column */
@@ -446,6 +446,8 @@ html.is-archive body{
 
 /* Months ribbon: last-first ordering emphasis */
 .is-archive .months{
+  position: static !important;
+
   display: grid;
   grid-auto-flow: column;                         /* fill by columns, top→bottom */
   grid-template-rows: repeat(2, auto);            /* two rows by default */
@@ -460,6 +462,11 @@ html.is-archive body{
   letter-spacing: .02em;
   font-size: 1rem;                                /* base */
   white-space: nowrap;                            /* keep 2025/08 together */
+
+  /* 👇 add these so months are plain links (not yellow/blue chips) */
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;                         /* keep 2025/08 together */
 }
 .is-archive .months a:first-child,
 .is-archive .months a[aria-current="true"]{
