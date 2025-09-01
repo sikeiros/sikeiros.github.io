@@ -131,44 +131,62 @@ a[href]:hover{ color:#1EFFF0; }
 }
 
 
-/* ==== Mobile breakpoint (switches scale, still zero margins) ==== */
+/* ==== Single mobile block (global ≤700px) ==== */
 @media (max-width: 700px){
-  /* Text size for mobile (scales proportionally, same no-reflow logic) */
-  /* Smaller number → bigger text; larger number → smaller text */
-  html { font-size: calc(100vw / 35); }  /* 👈 tweak 27 to adjust “point size” */
+  /* 1) Typography scale for all non-archive pages */
+  html { font-size: calc(100vw / 35); }   /* smaller divisor → bigger text */
+  body { line-height: 1.45; }
 
-  /* Optional readability tweak */
-  body { line-height: 1.45; } /* fixed */
-
+  /* 2) Bottom contacts nav (mobile layout) */
   .contacts-nav{
     position: fixed;
-    left: var(--nav-left, 1rem);  /* tweak this to move away from the right edge */
+    left: var(--nav-left, 1rem);
     bottom: calc(var(--nav-bottom, 1rem) + env(safe-area-inset-bottom, 0px));
-    right: auto;                      /* ensure it's anchored from the right, not stretched */
-    width: max-content;              /* shrink-wrap to its contents so it hugs the right */
+    right: auto;
+    width: max-content;
     z-index: 10;
   }
-
-
-  /* stack links one-per-row, still docked bottom-right */
   .contacts-nav ul{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;           /* right-align the column */
+    align-items: flex-start;
     gap: 0.6rem;
     margin: 0;
     padding: 0;
     text-align: left;
   }
   .contacts-nav li{ width: auto; }
-  
 
-  /* if stacked nav overlaps, reserve some space for last lines */
+  /* 3) Reserve space if overlap worries you */
   main{ padding-bottom: var(--reserve-bottom); }
 
-  /* optional: smaller hover image on mobile, or hide it */
-  .fake-link .hover-card{ width: 70vw; } /* or: display:none; */
+  /* 4) Hover preview narrower on phones */
+  .fake-link .hover-card{ width: 70vw; }
+
+  /* 5) About page stacking */
+  .about-grid{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nav"
+      "photo"
+      "cols";
+    gap: .75rem;
+  }
+  .about-photo img{ width: 100%; }
+  .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
+
+  /* 6) Project page header stacks */
+  .is-project .project{ grid-template-columns: 1fr; }
+  .is-project .project-back{ grid-column: 1; justify-self: end; }
+  .is-project .project h1{ grid-column: 1; margin: 0; }
+
+  /* 7) Two-up images stack to one */
+  .project-pair{
+    grid-template-columns: 1fr;
+    gap: .5rem;
+  }
 }
+
 
 /* ===== About page layout ===== */
 :root{
@@ -227,19 +245,6 @@ a[href]:hover{ color:#1EFFF0; }
 }
 .about-col li{ margin: 0 0 .4em 0; }
 
-/* ===== Mobile (<700px): stack neatly ===== */
-@media (max-width:700px){
-  .about-grid{
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "nav"
-      "photo"
-      "cols";
-    gap: .75rem;
-  }
-  .about-photo img{ width: 100%; }     /* full-width photo on mobile */
-  .about-cols{ grid-template-columns: 1fr; gap: .75rem; } /* stack lists */
-}
 
 /* Reusable chip links */
 a.chip{
@@ -309,11 +314,6 @@ html.is-about { font-size: calc(100vw / 61); }   /* bigger number = smaller text
   grid-column: 1 / -1;
 }
 
-@media (max-width:700px){
-  .is-project .project{ grid-template-columns: 1fr; }
-  .is-project .project-back{ grid-column: 1; justify-self: end; }
-  .is-project .project h1{ grid-column: 1; margin: 0; }
-}
 
 /* Rezak/project page header row */
 .is-project .project-head{
@@ -349,13 +349,6 @@ html.is-about { font-size: calc(100vw / 61); }   /* bigger number = smaller text
   height: auto;
 }
 
-/* Mobile: stack the pair into one column */
-@media (max-width: 700px){
-  .project-pair{
-    grid-template-columns: 1fr;  /* one image per row on phones */
-    gap: .5rem;                   /* tweak spacing between the two */
-  }
-}
 
 /* --- Font rendering tuning (global) --- */
 html{
