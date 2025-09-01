@@ -45,10 +45,7 @@ a[href]{
 }
 a[href]:hover{ color:#1EFFF0; }
 
-html{
-  -webkit-text-size-adjust: none;
-  text-size-adjust: none;
-}
+
 
 /* Remove any previous width:100% on nav; we’ll position it instead */
 .contacts-nav{
