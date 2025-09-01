@@ -135,7 +135,7 @@ nav a[href]:focus-visible{
 @media (max-width: 700px){
   /* Text size for mobile (scales proportionally, same no-reflow logic) */
   /* Smaller number → bigger text; larger number → smaller text */
-  html { font-size: calc(100vw / 27); }  /* 👈 tweak 27 to adjust “point size” */
+  html { font-size: calc(100vw / 30); }  /* 👈 tweak 27 to adjust “point size” */
 
   /* Optional readability tweak */
   body { line-height: 1.45; } /* fixed */
