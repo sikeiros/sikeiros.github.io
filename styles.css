@@ -137,7 +137,7 @@ html{
 /* ==== Single mobile block (global ≤700px) ==== */
 @media (max-width: 700px){
   /* 1) Typography scale for all non-archive pages */
-  html { font-size: calc(100vw / 10); }   /* smaller divisor → bigger text */
+  html { font-size: calc(100vw / 35); }   /* smaller divisor → bigger text */
   body { line-height: 1.45; }
 
   /* 2) Bottom contacts nav (mobile layout) */
