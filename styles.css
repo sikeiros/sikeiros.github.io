@@ -45,6 +45,10 @@ a[href]{
 }
 a[href]:hover{ color:#1EFFF0; }
 
+html{
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
 
 /* Remove any previous width:100% on nav; we’ll position it instead */
 .contacts-nav{
@@ -133,7 +137,7 @@ a[href]:hover{ color:#1EFFF0; }
 /* ==== Single mobile block (global ≤700px) ==== */
 @media (max-width: 700px){
   /* 1) Typography scale for all non-archive pages */
-  html { font-size: calc(100vw / 50); }   /* smaller divisor → bigger text */
+  html { font-size: calc(100vw / 10); }   /* smaller divisor → bigger text */
   body { line-height: 1.45; }
 
   /* 2) Bottom contacts nav (mobile layout) */
