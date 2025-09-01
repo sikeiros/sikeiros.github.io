@@ -1,0 +1,496 @@
+:root{
+  /* Offsets in rem so they scale with your fluid type */
+  --nav-right: 1rem;     /* distance from the right edge */
+  --nav-bottom: 1rem;    /* distance from the bottom edge */
+  --reserve-bottom: 0rem;/* set >0rem if you want to keep text from going under the nav */
+}
+
+
+@font-face{
+  font-family: "MyExperimentalSans-Mono";
+  src: url("https://delightful-bienenstitch-d126bb.netlify.app/myexperimentalsans-mono.woff") format("woff");
+  font-weight: 500;   /* если variable; иначе заведи блоки под 400/700 и т.п. */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==== Resets (kill ALL default gaps) ==== */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; padding: 0; }        /* no outer margins at all */
+main, nav { margin: 0; padding: 0; }                        /* no inner margins either */
+nav ul { list-style: none; margin: 0; padding: 0; }         /* remove UL default gaps */
+
+/* ==== Fluid desktop/tablet ==== */
+html { font-size: calc(100vw / 48); }            
+body {
+  font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  margin: 0;   /* 👈 change this */
+  padding: 0.3rem 1rem;
+  background:#fff; color:#000;
+}
+
+/* Full-bleed text blocks */
+main, nav { width: 100%; margin: 0; padding: 0; }
+
+/* Links yellow background blue hover */
+a[href]{
+  background: #ffff67;
+  color: #000;
+  text-decoration: none;
+  padding: 0 .25em;
+  line-height: 1.4;
+  vertical-align: baseline;
+}
+a[href]:hover{ color:#1EFFF0; }
+
+
+
+/* Remove any previous width:100% on nav; we’ll position it instead */
+nav{
+  position: fixed;
+  right: var(--nav-right);
+  bottom: calc(var(--nav-bottom) + env(safe-area-inset-bottom, 0px)); /* iOS safe area */
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: .75rem 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;  /* align links to the right edge */
+  text-align: right;
+}
+
+
+nav a[href]{
+  background:#1EFFF0;  /* blue by default */
+  color:#000;
+  padding:.15em .4em;
+  transition: background-color .15s ease; /* smooth */
+}
+
+nav a[href]:hover,
+nav a[href]:focus-visible{
+  color:#ffff67;  /* yellow txt on hover */
+  
+}
+
+
+
+/* === “Fake link” that shows an image on hover/focus === */
+.fake-link{
+  /* copy your link chip look */
+  background:#ffff67;
+  color:#000;
+  text-decoration:none;
+  padding:0 .25em;
+  cursor:default;
+  position:relative;            /* anchor for the preview */
+  outline:none;                  /* we'll rely on focus-visible below */
+}
+
+.fake-link:hover,
+.fake-link:focus-visible{
+  color:#1EFFF0;                 /* same hover color as links */
+}
+
+/* the hover image (hidden by default) */
+.fake-link .hover-card{
+  position:absolute;
+  left:0;                        /* start under the phrase; tweak if needed */
+  top:1.6em;                     /* vertical offset from baseline */
+  width:min(28rem, 42vw);        /* scales with viewport, capped */
+  max-height:75vh;
+  object-fit:cover;
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  border:1px solid rgba(0,0,0,.08);
+  background:#fff;
+
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(4px) scale(.98);
+  transition:opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+  pointer-events:none;           /* don’t steal the hover */
+  z-index:20;
+}
+
+/* show it on hover OR keyboard focus */
+.fake-link:hover .hover-card,
+.fake-link:focus-within .hover-card{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
+  transition:opacity .18s ease, transform .18s ease, visibility 0s;
+}
+
+
+/* ==== Mobile breakpoint (switches scale, still zero margins) ==== */
+@media (max-width: 700px){
+  /* Text size for mobile (scales proportionally, same no-reflow logic) */
+  /* Smaller number → bigger text; larger number → smaller text */
+  html { font-size: calc(100vw / 27); }  /* 👈 tweak 27 to adjust “point size” */
+
+  /* Optional readability tweak */
+  body { line-height: 1.45; } /* fixed */
+
+  nav{
+    position: fixed;
+    left: var(--nav-left, 1rem);  /* tweak this to move away from the right edge */
+    bottom: calc(var(--nav-bottom, 1rem) + env(safe-area-inset-bottom, 0px));
+    right: auto;                      /* ensure it's anchored from the right, not stretched */
+    width: max-content;              /* shrink-wrap to its contents so it hugs the right */
+    z-index: 10;
+  }
+
+
+  /* stack links one-per-row, still docked bottom-right */
+  nav ul{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;           /* right-align the column */
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+  nav li{ width: auto; }
+  
+
+  /* if stacked nav overlaps, reserve some space for last lines */
+  main{ padding-bottom: var(--reserve-bottom); }
+
+  /* optional: smaller hover image on mobile, or hide it */
+  .fake-link .hover-card{ width: 70vw; } /* or: display:none; */
+}
+
+/* ===== About page layout ===== */
+:root{
+  /* Easy knobs (scale with your existing desktop/mobile type) */
+  --about-photo-w: 22rem;   /* photo width on desktop/tablet */
+  --about-gap: 1rem;        /* spacing between blocks */
+  --about-col-gap: 1rem;    /* spacing between the three columns */
+}
+
+/* Grid: top row = [nav | photo], second row = [three columns] */
+.about-grid{
+  display: grid;
+  grid-template-columns: 1fr var(--about-photo-w);
+  grid-template-areas:
+    "nav  photo"
+    "cols cols";
+  align-items: start;
+  gap: var(--about-gap);
+}
+
+/* Top-left chip link (matches your yellow link style) */
+.about-nav{
+  grid-area: nav;
+  justify-self: start;
+  background:#ffff67;
+  color:#000;
+  text-decoration:none;
+  padding:0 .25em;
+}
+
+/* Top-right photo */
+.about-photo{ grid-area: photo; margin:0; }
+.about-photo img{
+  display:block;
+  width: var(--about-photo-w);
+  max-width: 100%;
+  height:auto;
+}
+
+/* Three columns below the photo */
+.about-cols{
+  grid-area: cols;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: var(--about-col-gap);
+}
+.about-col h2{
+  margin: 0 0 .5em 0;
+  font-size: 1em;           /* keep headings aligned with your body size */
+  font-weight: normal;      /* or 600 if you want emphasis */
+}
+.about-col ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.about-col li{ margin: 0 0 .4em 0; }
+
+/* ===== Mobile (<700px): stack neatly ===== */
+@media (max-width:700px){
+  .about-grid{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nav"
+      "photo"
+      "cols";
+    gap: .75rem;
+  }
+  .about-photo img{ width: 100%; }     /* full-width photo on mobile */
+  .about-cols{ grid-template-columns: 1fr; gap: .75rem; } /* stack lists */
+}
+
+/* Reusable chip links */
+a.chip{
+  display:inline-block;
+  background:#1EFFF0;   /* blue box */
+  color:#000;           /* text */
+  padding:.15em 2em;
+  text-decoration:none;
+  transition: color .15s ease; /* only text color animates */
+}
+a.chip:hover,
+a.chip:focus-visible{
+  color:#ffff67;        /* yellow text on hover/focus */
+}
+
+/* === About page: smaller point size === */
+/* Desktop / tablet */
+html.is-about { font-size: calc(100vw / 61); }   /* bigger number = smaller text */
+
+/* Mobile */
+@media (max-width: 700px){
+  html.is-about { font-size: calc(100vw / 29); } /* tweak this too if needed */
+}
+
+
+/* ===== Simple project page tweaks (reusable) ===== */
+
+.project h1{ margin: 0 0 .6em; font-size: 3em; }      /* subtle title size */
+.project p{ margin: 0 0 .6em; }                           /* paragraph spacing */
+
+.project-figure{ margin: 0 0 .75rem; }                    /* space between images */
+.project-figure img{
+  display:block;
+  width:100%;            /* full-bleed image within your page */
+  height:auto;
+}
+
+/* Rezak only: put the back chip on the right, keep everything else below it */
+/* Rezak page only (scoped by <html class="is-project">) */
+.is-project .project{
+  display: grid;
+  grid-template-columns: 1fr max-content; /* title (left) | chip (right) */
+  column-gap: .75rem;                      /* tweak spacing between them */
+  align-items: start;
+}
+
+/* top-right back chip */
+.is-project .project-back{
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  margin: 0;
+  line-height: 1;
+  float: none;          /* neutralize any earlier float */
+  position: static;     /* neutralize any earlier absolute/fixed */
+}
+
+/* h1 on the same top line (left) */
+.is-project .project h1{
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;            /* kill default top margin that causes the offset */
+}
+
+/* everything else (paragraphs, figures) flows below, full width */
+.is-project .project > :not(.project-back):not(h1){
+  grid-column: 1 / -1;
+}
+
+@media (max-width:700px){
+  .is-project .project{ grid-template-columns: 1fr; }
+  .is-project .project-back{ grid-column: 1; justify-self: end; }
+  .is-project .project h1{ grid-column: 1; margin: 0; }
+}
+
+/* Rezak/project page header row */
+.is-project .project-head{
+  display: flex;
+  justify-content: space-between;  /* H1 left, back chip right */
+  align-items: flex-start;          /* align on the same top edge */
+  gap: .75rem;
+  margin: 0 0 .6em;
+}
+
+/* Kill H1’s default top margin so it sits flush with the chip */
+.is-project .project-head h1{ margin: 0; }
+
+/* Optional micro-nudges (edit just these values) */
+.is-project .project-head h1{ position: relative; top: var(--rezak-h1-nudge, -0.25em); }
+.is-project .project-back{     position: relative; top: var(--rezak-back-nudge, 0.5em); }
+
+/* Two-up row for project images */
+.project-pair{
+  display: grid;
+  grid-template-columns: 1fr 1fr;     /* two columns */
+  gap: .75rem;                        /* space between them (match your taste) */
+  margin: 0 0 .75rem;                 /* space below the pair row */
+}
+
+/* Inside the pair, let the grid gap handle spacing (no extra margins) */
+.project-pair .project-figure{ margin: 0; }
+
+/* Make sure images behave (these likely exist already) */
+.project-figure img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Mobile: stack the pair into one column */
+@media (max-width: 700px){
+  .project-pair{
+    grid-template-columns: 1fr;  /* one image per row on phones */
+    gap: .5rem;                   /* tweak spacing between the two */
+  }
+}
+
+/* --- Font rendering tuning (global) --- */
+html{
+  -webkit-font-smoothing: antialiased;   /* macOS Safari/Chrome: thins strokes */
+  -moz-osx-font-smoothing: grayscale;    /* macOS Firefox */
+  text-rendering: optimizeLegibility;    /* enables kerning/ligatures, softer AA */
+  font-synthesis: none;                  /* prevent synthetic bold/italic */
+}
+
+/* Make sure we aren’t accidentally bolding anywhere */
+body{ font-weight: 500; }
+
+
+/* =========================================================
+   ARCHIVE PAGE (scoped): append this to the end of styles.css
+   Requires <html class="is-archive"> in /archive/index.html
+   ========================================================= */
+
+/* Variables / base just for the archive page */
+html.is-archive{
+  /* frame + typography knobs */
+  --content: 70rem;                    /* ≈1120px */
+  --gutter:  3.6rem;                   /* side padding ≈64px */
+  --frame:   calc(var(--content) + 2*var(--gutter));
+  --space:   1.25rem;                  /* ≈20px base spacing */
+
+  /* colors */
+  --fg:#111;
+  --muted:#777;
+  --rule:#e7e7e7;
+
+  /* corners */
+  --br: 12px;
+}
+
+/* Archive body face & base line-height (keeps your look) */
+html.is-archive body{
+  margin: 0;
+  color: var(--fg);
+  font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.55;
+}
+
+/* ===== DESKTOP SCENE: width >= 900px ===== */
+@media (min-width: 900px) {
+  /* 1080px frame. 1rem = 100vw / 67.5 => frame == 100vw */
+  html.is-archive { font-size: calc(100vw / 67.5); }               /* 1080/16 = 67.5rem */
+
+  .is-archive main{
+    width: 67.5rem;                                                 /* frame */
+    padding: 0 4rem 0;                                              /* top | sides | bottom */
+    margin: 0 auto 6rem;
+    box-sizing: border-box;
+  }
+
+  /* Type sizes (from your file) */
+  .is-archive body { font-size: 1.9167rem; }                        /* ≈30.7px */
+  .is-archive h1 { font-size: 2.085em; margin: 0 0 0.1em; text-align: center; }
+  .is-archive h2 { font-size: 1.107em; margin: 0 0 0.35em; }
+  .is-archive .story figcaption { font-size: .455em; text-align: center; margin-top: .35em; } /* ≈14px */
+  .is-archive .note { font-size: .55em; }
+
+  /* Months spacing (your comment said ~var(--space)*.8) */
+  .is-archive .months{ margin: 0 0 2rem; }
+}
+
+/* ===== MOBILE SCENE: width < 900px ===== */
+@media (max-width: 899.98px) {
+  /* 360px frame. 1rem = 100vw / 22.5 => frame == 100vw */
+  html.is-archive { font-size: calc(100vw / 22.5); }                /* 360/16 = 22.5rem */
+
+  .is-archive main{
+    width: 20.5rem;
+    margin: 1.5rem auto 3.5rem;
+    padding-inline: 1rem;
+  }
+
+  .is-archive body { font-size: 1.9167rem; }
+  .is-archive h1 { font-size: 2.085em; margin: 0 0 0.7em; text-align: center; }
+  .is-archive h2 { font-size: 1.107em; margin: 0 0 0.35em; }
+  .is-archive .story figcaption { font-size: .455em; text-align: center; margin-top: .35em; }
+
+  /* Two-up rows collapse to one column on phones */
+  .is-archive .row-2 { grid-template-columns: 1fr; }
+}
+
+/* ===== Archive components (scoped) ===== */
+
+/* Months ribbon: last-first ordering emphasis */
+.is-archive .months{
+  display: grid;
+  grid-auto-flow: column;                         /* fill by columns, top→bottom */
+  grid-template-rows: repeat(2, auto);            /* two rows by default */
+  grid-auto-columns: minmax(8rem, 1fr);           /* ≥8rem, share the width */
+  gap: .5rem 1rem;                                /* row gap | column gap */
+  align-items: start;
+}
+.is-archive .months a{
+  text-decoration: none;
+  color: var(--fg);
+  opacity: .35;
+  letter-spacing: .02em;
+  font-size: 1rem;                                /* base */
+  white-space: nowrap;                            /* keep 2025/08 together */
+}
+.is-archive .months a:first-child,
+.is-archive .months a[aria-current="true"]{
+  opacity: 1;
+}
+/* If 17+ months, switch to 3 rows */
+.is-archive .months:has(a:nth-child(n+17)){
+  grid-template-rows: repeat(3, auto);
+}
+
+/* Story stream */
+.is-archive .story{ display:grid; gap:var(--space); }
+.is-archive .story figure{ margin:0; }
+.is-archive .story img,
+.is-archive .story video{
+  width:100%; height:auto; display:block; border-radius:var(--br);
+}
+.is-archive .story figcaption{ color:#555; margin-top:.375rem; text-align:center; }
+
+/* Two-up row (desktop) */
+.is-archive .row-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--space);
+  align-items: start;
+}
+.is-archive .row-2 > *{ min-width:0; }           /* prevent stretch */
+
+/* Misc text bits */
+.is-archive .note{ color:#444; margin-top:.5rem; }
+.is-archive .footer{ margin-top:2.25rem; font-size:.8125rem; color:#777; }
+
+/* Center captions in all contexts */
+.is-archive .row-2 figcaption{ text-align:center; }
