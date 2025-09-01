@@ -31,6 +31,11 @@ body {
   background:#fff; color:#000;
 }
 
+html{
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
 /* Full-bleed text blocks */
 main, nav { width: 100%; margin: 0; padding: 0; }
 
