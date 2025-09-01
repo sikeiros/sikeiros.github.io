@@ -9,7 +9,7 @@
 @font-face{
   font-family: "MyExperimentalSans-Mono";
   src: url("https://delightful-bienenstitch-d126bb.netlify.app/myexperimentalsans-mono.woff") format("woff");
-  font-weight: 500;   /* если variable; иначе заведи блоки под 400/700 и т.п. */
+  font-weight: 500; 
   font-style: normal;
   font-display: swap;
 }
@@ -45,7 +45,10 @@ a[href]{
 }
 a[href]:hover{ color:#1EFFF0; }
 
-
+html{
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 /* Remove any previous width:100% on nav; we’ll position it instead */
 .contacts-nav{
