@@ -160,7 +160,7 @@ a[href]:hover{ color:#1EFFF0; }
     padding: 0;
     text-align: left;
   }
-  nav li{ width: auto; }
+  .contacts-nav li{ width: auto; }
   
 
   /* if stacked nav overlaps, reserve some space for last lines */
@@ -501,3 +501,17 @@ html.is-archive body{
 
 /* Center captions in all contexts */
 .is-archive .row-2 figcaption{ text-align:center; }
+
+/* ARCHIVE: make all non-contacts navs plain and not fixed */
+.is-archive nav:not(.contacts-nav){
+  position: static !important;
+  inset: auto !important;   /* cancels top/right/bottom/left if something set them */
+  width: auto;
+}
+
+.is-archive nav:not(.contacts-nav) a[href]{
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  color: var(--fg);
+}
