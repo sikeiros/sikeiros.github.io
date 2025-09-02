@@ -193,20 +193,21 @@ a[href]:hover{ color:#1EFFF0; }
 /* === About page hover panel (keeps your existing fake-link behavior) === */
 .is-about .fake-link{
   position: relative;
-  display: inline;               /* keep in-flow, don’t break the line */
-  padding-bottom: .35em;         /* small “bridge” so hover doesn’t drop */
+  display: inline-block;               /* keep in-flow, don’t break the line */
+  padding-bottom: .15em;         /* small “bridge” so hover doesn’t drop */
 }
 
 .is-about .fake-link .hover-card{
   /* align under the phrase, tighter top spacing */
   left: 0;
-  top: 0;     /* smaller gap above */
+  top: -0.20em;     /* smaller gap above */
   width: 100cqi;                /* match this column’s width */
   max-width: none;
   box-sizing: border-box;       /* include padding in that width */
   background: #ffff67;          /* yellow panel */
   color: #000;                  /* black text */
-  margin: 0 0 .75rem;           /* only space below */
+  margin: 0 0 .75rem;
+  padding: .5em 1em .8em;           /* only space below */
   pointer-events: auto;
   z-index: 100;                  /* sit above surrounding text */
 }
