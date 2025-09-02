@@ -139,7 +139,7 @@ a[href]:hover{ color:#1EFFF0; }
 /* ==== Single mobile block (global ≤700px) ==== */
 @media (max-width: 700px){
   /* 1) Typography scale for all non-archive pages */
-  html { font-size: calc(100vw / 20); }   /* smaller divisor → bigger text */
+  html { font-size: calc(100vw / 22); }   /* smaller divisor → bigger text */
   body { line-height: 1.45; }
 
   /* 2) Bottom contacts nav (mobile layout) */
@@ -153,7 +153,7 @@ a[href]:hover{ color:#1EFFF0; }
     width: max-content;
     z-index: auto;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     
   }
   .contacts-nav ul{
