@@ -200,7 +200,7 @@ a[href]:hover{ color:#1EFFF0; }
 .is-about .fake-link .hover-card{
   /* align under the phrase, tighter top spacing */
   left: 0;
-  top: -0.1em;     /* smaller gap above */
+  top: -0.15em;     /* smaller gap above */
   width: 100cqi;                /* match this column’s width */
   max-width: none;
   box-sizing: border-box;       /* include padding in that width */
