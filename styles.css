@@ -178,6 +178,7 @@ a[href]:hover{ color:#1EFFF0; }
 
 /* nudge down a bit + margins around the panel */
 .fake-link.panel .hover-card{
+  position: absolute;
   top: calc(100% + .2em);    /* a little space under the phrase */
   margin: 0 .75em .75em;     /* breathing room on right/bottom/left */
   z-index: 100;              /* be safely above surrounding text */
@@ -401,7 +402,7 @@ html.is-about { font-size: calc(100vw / 61); }   /* bigger number = smaller text
 
 /* Mobile */
 @media (max-width: 700px){
-  html.is-about { font-size: calc(100vw / 50); } /* tweak this too if needed */
+  html.is-about { font-size: calc(100vw / 22); } /* tweak this too if needed */
 }
 
 
@@ -653,18 +654,3 @@ html.is-archive body{
 }*/
 
 
-/* STUPID MOBILE ABOUT DUPLICATE */
-/* ==== Mobile ≤700px (About stacks) ==== */
-@media (max-width:700px){
-  .about-grid{
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "nav"
-      "photo"
-      "cols";
-    gap: .75rem;
-  }
-  .about-photo img{ width: 100%; }       /* photo shrinks to container */
-
-  .about-cols{ grid-template-columns: 1fr; gap: .75rem; } /* stack columns */
-}
