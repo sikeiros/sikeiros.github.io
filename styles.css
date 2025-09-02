@@ -136,7 +136,8 @@ a[href]:hover{ color:#1EFFF0; }
 }
 
 
-/* ==== Single mobile block (global ≤700px) ==== */
+
+/* ==== MOBILE SINGLE BLOCK ==== */
 @media (max-width: 700px){
   /* 1) Typography scale for all non-archive pages */
   html { font-size: calc(100vw / 22); }   /* smaller divisor → bigger text */
@@ -206,8 +207,7 @@ a[href]:hover{ color:#1EFFF0; }
 }
 }
 
-/* Default: hide the bottom back chip on larger screens */
-.is-project .project-back-mobile{ display: none; }
+
 
 
 /* ===== About page layout ===== */
@@ -306,69 +306,72 @@ html.is-about { font-size: calc(100vw / 61); }   /* bigger number = smaller text
 
 /* Rezak only: put the back chip on the right, keep everything else below it */
 /* Rezak page only (scoped by <html class="is-project">) */
-.is-project .project{
-  display: grid;
-  grid-template-columns: 1fr max-content; /* title (left) | chip (right) */
-  column-gap: .75rem;                      /* tweak spacing between them */
-  align-items: start;
-}
+@media (min-width: 701px){
+  .is-project .project{
+    display: grid;
+    grid-template-columns: 1fr max-content; /* title (left) | chip (right) */
+    column-gap: .75rem;                      /* tweak spacing between them */
+    align-items: start;
+  }
 
-/* top-right back chip */
-.is-project .project-back{
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: end;
-  margin: 0;
-  line-height: 1;
-  float: none;          /* neutralize any earlier float */
-  position: static;     /* neutralize any earlier absolute/fixed */
-}
+  /* top-right back chip */
+  .is-project .project-back{
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    margin: 0;
+    line-height: 1;
+    float: none;          /* neutralize any earlier float */
+    position: static;     /* neutralize any earlier absolute/fixed */
+  }
 
-/* h1 on the same top line (left) */
-.is-project .project h1{
-  grid-column: 1;
-  grid-row: 1;
-  margin: 0;            /* kill default top margin that causes the offset */
-}
+  /* h1 on the same top line (left) */
+  .is-project .project h1{
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;            /* kill default top margin that causes the offset */
+  }
 
-/* everything else (paragraphs, figures) flows below, full width */
-.is-project .project > :not(.project-back):not(h1){
-  grid-column: 1 / -1;
-}
+  /* everything else (paragraphs, figures) flows below, full width */
+  .is-project .project > :not(.project-back):not(h1){
+    grid-column: 1 / -1;
+  }
 
 
-/* Rezak/project page header row */
-.is-project .project-head{
-  display: flex;
-  justify-content: space-between;  /* H1 left, back chip right */
-  align-items: flex-start;          /* align on the same top edge */
-  gap: .75rem;
-  margin: 0 0 .6em;
-}
+  /* Rezak/project page header row */
+  .is-project .project-head{
+    display: flex;
+    justify-content: space-between;  /* H1 left, back chip right */
+    align-items: flex-start;          /* align on the same top edge */
+    gap: .75rem;
+    margin: 0 0 .6em;
+  }
 
-/* Kill H1’s default top margin so it sits flush with the chip */
-.is-project .project-head h1{ margin: 0; }
+  /* Kill H1’s default top margin so it sits flush with the chip */
+  .is-project .project-head h1{ margin: 0; }
 
-/* Optional micro-nudges (edit just these values) */
-.is-project .project-head h1{ position: relative; top: var(--rezak-h1-nudge, -0.25em); }
-.is-project .project-back{     position: relative; top: var(--rezak-back-nudge, 0.5em); }
+  /* Optional micro-nudges (edit just these values) */
+  .is-project .project-head h1{ position: relative; top: var(--rezak-h1-nudge, -0.25em); }
+  .is-project .project-back{     position: relative; top: var(--rezak-back-nudge, 0.5em); }
 
-/* Two-up row for project images */
-.project-pair{
-  display: grid;
-  grid-template-columns: 1fr 1fr;     /* two columns */
-  gap: .75rem;                        /* space between them (match your taste) */
-  margin: 0 0 .75rem;                 /* space below the pair row */
-}
+  /* Two-up row for project images */
+  .project-pair{
+    display: grid;
+    grid-template-columns: 1fr 1fr;     /* two columns */
+    gap: .75rem;                        /* space between them (match your taste) */
+    margin: 0 0 .75rem;                 /* space below the pair row */
+  }
 
-/* Inside the pair, let the grid gap handle spacing (no extra margins) */
-.project-pair .project-figure{ margin: 0; }
+  /* Inside the pair, let the grid gap handle spacing (no extra margins) */
+  .project-pair .project-figure{ margin: 0; }
 
-/* Make sure images behave (these likely exist already) */
-.project-figure img{
-  display: block;
-  width: 100%;
-  height: auto;
+  /* Make sure images behave (these likely exist already) */
+  .project-figure img{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .is-project .project-back-mobile{ display: none; }
 }
 
 
