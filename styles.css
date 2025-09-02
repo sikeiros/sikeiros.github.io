@@ -513,3 +513,7 @@ html.is-archive body{
   border-radius: 0 !important;
   color: var(--fg);
 }
+
+@media (max-width:700px){
+  html{ outline: 4px solid hotpink !important; }
+}
