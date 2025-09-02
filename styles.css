@@ -229,6 +229,12 @@ a[href]:hover{ color:#1EFFF0; }
   color: #1EFFF0;                /* your yellow on hover */
 }
 
+.is-about .fake-link.panel .hover-card > *{
+  margin: 0;                 /* kill default p/ul margins */
+}
+.is-about .fake-link.panel .hover-card > * + *{
+  margin-top: .35em;         /* gentle spacing between items */
+}
 
 /* ==== MOBILE SINGLE BLOCK ==== */
 @media (max-width: 700px){
