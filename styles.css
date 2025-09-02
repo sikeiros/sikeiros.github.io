@@ -514,7 +514,7 @@ html.is-archive body{
   color: var(--fg);
 }
 
-/*TEST*/
+/*TEST
 @media (max-width:700px){
   html{ outline: 4px solid hotpink !important; }
-}
+}*/
