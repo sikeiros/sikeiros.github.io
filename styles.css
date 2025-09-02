@@ -144,11 +144,13 @@ a[href]:hover{ color:#1EFFF0; }
 
   /* 2) Bottom contacts nav (mobile layout) */
   .contacts-nav{
-    position: fixed;
+    position: static;
     left: var(--nav-left, 1rem);
     bottom: calc(var(--nav-bottom, 1rem) + env(safe-area-inset-bottom, 0px));
     right: auto;
+    inset: auto;
     width: max-content;
+    margin-top: 1rem;
     z-index: 10;
   }
   .contacts-nav ul{
@@ -162,8 +164,9 @@ a[href]:hover{ color:#1EFFF0; }
   }
   .contacts-nav li{ width: auto; }
 
-  /* 3) Reserve space if overlap worries you */
-  main{ padding-bottom: var(--reserve-bottom); }
+  /* 3) Reserve space if overlap worries you 
+  main{ padding-bottom: var(--reserve-bottom); }*/
+  main{ padding-bottom: 0; }
 
   /* 4) Hover preview narrower on phones */
   .fake-link .hover-card{ width: 70vw; }
