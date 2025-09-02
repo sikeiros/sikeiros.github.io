@@ -236,6 +236,19 @@ a[href]:hover{ color:#1EFFF0; }
   margin-top: .35em;         /* gentle spacing between items */
 }
 
+.is-about .fake-link.panel .hover-card p:first-child,
+.is-about .fake-link.panel .hover-card ul:first-child{
+  margin-top: 0;
+}
+
+/* Tidy list indentation in the panel */
+.is-about .fake-link.panel .hover-card ul{
+  padding-left: 1em;         /* smaller than browser default */
+}
+.is-about .fake-link.panel .hover-card li + li{
+  margin-top: .1em;          /* compact list */
+}
+
 /* ==== MOBILE SINGLE BLOCK ==== */
 @media (max-width: 700px){
   /* 1) Typography scale for all non-archive pages */
