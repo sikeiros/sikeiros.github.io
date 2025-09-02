@@ -178,7 +178,6 @@ a[href]:hover{ color:#1EFFF0; }
 
 /* nudge down a bit + margins around the panel */
 .fake-link.panel .hover-card{
-  position: absolute;
   top: calc(100% + .2em);    /* a little space under the phrase */
   margin: 0 .75em .75em;     /* breathing room on right/bottom/left */
   z-index: 100;              /* be safely above surrounding text */
