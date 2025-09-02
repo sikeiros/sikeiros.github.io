@@ -203,7 +203,7 @@ a[href]:hover{ color:#1EFFF0; }
 .is-about .fake-link .hover-card{
   /* align under the phrase, tighter top spacing */
   left: 0;
-  top: calc(100% + .06em);     /* smaller gap above */
+  top: 0;     /* smaller gap above */
   width: 100cqi;                /* match this column’s width */
   max-width: none;
   box-sizing: border-box;       /* include padding in that width */
@@ -228,7 +228,7 @@ a[href]:hover{ color:#1EFFF0; }
 }
 .is-about .fake-link .hover-card a[href]:hover,
 .is-about .fake-link .hover-card a[href]:focus-visible{
-  color: #ffff67;                /* your yellow on hover */
+  color: #1EFFF0;                /* your yellow on hover */
 }
 
 
