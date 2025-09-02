@@ -246,7 +246,7 @@ a[href]:hover{ color:#1EFFF0; }
   padding-left: 1em;         /* smaller than browser default */
 }
 .is-about .fake-link.panel .hover-card li + li{
-  margin-top: .1em;          /* compact list */
+  margin-top: .2em;          /* compact list */
 }
 
 /* ==== MOBILE SINGLE BLOCK ==== */
@@ -651,3 +651,20 @@ html.is-archive body{
 @media (max-width:700px){
   html{ outline: 4px solid hotpink !important; }
 }*/
+
+
+/* STUPID MOBILE ABOUT DUPLICATE */
+/* ==== Mobile ≤700px (About stacks) ==== */
+@media (max-width:700px){
+  .about-grid{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nav"
+      "photo"
+      "cols";
+    gap: .75rem;
+  }
+  .about-photo img{ width: 100%; }       /* photo shrinks to container */
+
+  .about-cols{ grid-template-columns: 1fr; gap: .75rem; } /* stack columns */
+}
