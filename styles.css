@@ -135,7 +135,7 @@ a[href]:hover{ color:#1EFFF0; }
   transition:opacity .18s ease, transform .18s ease, visibility 0s;
 }
 
-/* Panel variant: blue text card with clickable links */
+/* FOR ABOUT: Panel variant: blue text card with clickable links */
 .fake-link.panel .hover-card{
   /* override the image-focused defaults */
   top: 100%;               /* sit under the phrase */
@@ -170,6 +170,27 @@ a[href]:hover{ color:#1EFFF0; }
     transform: translateX(-50%);
     width: min(90vw, 28rem);
   }
+}
+
+/* keep the panel open as you move into it, and give it some room */
+.fake-link.panel{
+  display: inline-block;     /* anchor for the absolute card */
+  position: relative;
+  padding-bottom: .6em;      /* bridge so you don't fall through a gap */
+}
+
+/* nudge down a bit + margins around the panel */
+.fake-link.panel .hover-card{
+  top: calc(100% + .2em);    /* a little space under the phrase */
+  margin: 0 .75em .75em;     /* breathing room on right/bottom/left */
+  z-index: 100;              /* be safely above surrounding text */
+}
+
+/* ensure all panel text reads black by default */
+.fake-link.panel .hover-card,
+.fake-link.panel .hover-card p,
+.fake-link.panel .hover-card li{
+  color: #000;
 }
 
 
