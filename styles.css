@@ -146,12 +146,13 @@ a[href]:hover{ color:#1EFFF0; }
   .contacts-nav{
     position: static;
     left: var(--nav-left, 1rem);
-    bottom: calc(var(--nav-bottom, 1rem) + env(safe-area-inset-bottom, 0px));
+    /*bottom: calc(var(--nav-bottom, 1rem) + env(safe-area-inset-bottom, 0px));*/
     right: auto;
     inset: auto;
     width: max-content;
+    z-index: auto;
     margin-top: 1rem;
-    z-index: 10;
+    
   }
   .contacts-nav ul{
     display: flex;
