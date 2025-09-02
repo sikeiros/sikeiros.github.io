@@ -203,17 +203,14 @@ a[href]:hover{ color:#1EFFF0; }
 .is-about .fake-link .hover-card{
   /* align under the phrase, tighter top spacing */
   left: 0;
-  top: calc(100% + .12em);
-
-  /* match the column width (thanks to container-type on .about-cols) */
-  width: 100cqi;                 /* “column width” */
+  top: calc(100% + .06em);     /* smaller gap above */
+  width: 100cqi;                /* match this column’s width */
   max-width: none;
-
-  /* panel look + readable text */
-  background: #1EFFF0;
-  color: #000;
-  margin: 0 0 .75rem;            /* only space below (no big top margin) */
-  pointer-events: auto;          /* allow clicking links */
+  box-sizing: border-box;       /* include padding in that width */
+  background: #ffff67;          /* yellow panel */
+  color: #000;                  /* black text */
+  margin: 0 0 .75rem;           /* only space below */
+  pointer-events: auto;
   z-index: 100;                  /* sit above surrounding text */
 }
 
@@ -271,7 +268,7 @@ a[href]:hover{ color:#1EFFF0; }
   main{ padding-bottom: 0; }
 
   /* 4) Hover preview narrower on phones */
-  .fake-link .hover-card{ width: 70vw; }
+  .fake-link:not(.panel) .hover-card{ width: 70vw; }
 
   /* 5) About page stacking */
   .about-grid{
@@ -283,7 +280,8 @@ a[href]:hover{ color:#1EFFF0; }
     gap: .75rem;
   }
   .about-photo img{ width: 100%; }
-  .about-cols{ grid-template-columns: 1fr; gap: .75rem; container-type: inline-size; }
+  /*.about-cols{ grid-template-columns: 1fr; gap: .75rem; container-type: inline-size; }*/
+  .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
 
   /* 6) Project page header stacks */
   .is-project .project{ grid-template-columns: 1fr; }
@@ -364,7 +362,7 @@ a[href]:hover{ color:#1EFFF0; }
   padding: 0;
 }
 .about-col li{ margin: 0 0 .4em 0; }
-
+.about-col{ container-type: inline-size; }
 
 /* Reusable chip links */
 a.chip{
