@@ -193,6 +193,46 @@ a[href]:hover{ color:#1EFFF0; }
   color: #000;
 }
 
+/* === About page hover panel (keeps your existing fake-link behavior) === */
+.is-about .fake-link{
+  position: relative;
+  display: inline;               /* keep in-flow, don’t break the line */
+  padding-bottom: .35em;         /* small “bridge” so hover doesn’t drop */
+}
+
+.is-about .fake-link .hover-card{
+  /* align under the phrase, tighter top spacing */
+  left: 0;
+  top: calc(100% + .12em);
+
+  /* match the column width (thanks to container-type on .about-cols) */
+  width: 100cqi;                 /* “column width” */
+  max-width: none;
+
+  /* panel look + readable text */
+  background: #1EFFF0;
+  color: #000;
+  margin: 0 0 .75rem;            /* only space below (no big top margin) */
+  pointer-events: auto;          /* allow clicking links */
+  z-index: 100;                  /* sit above surrounding text */
+}
+
+/* ensure all text inside is black, links behave like links (no yellow pill) */
+.is-about .fake-link .hover-card,
+.is-about .fake-link .hover-card p,
+.is-about .fake-link .hover-card li{ color: #000; }
+
+.is-about .fake-link .hover-card a[href]{
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: #000;
+  text-decoration: underline;
+}
+.is-about .fake-link .hover-card a[href]:hover,
+.is-about .fake-link .hover-card a[href]:focus-visible{
+  color: #ffff67;                /* your yellow on hover */
+}
 
 
 /* ==== MOBILE SINGLE BLOCK ==== */
@@ -243,7 +283,7 @@ a[href]:hover{ color:#1EFFF0; }
     gap: .75rem;
   }
   .about-photo img{ width: 100%; }
-  .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
+  .about-cols{ grid-template-columns: 1fr; gap: .75rem; container-type: inline-size; }
 
   /* 6) Project page header stacks */
   .is-project .project{ grid-template-columns: 1fr; }
