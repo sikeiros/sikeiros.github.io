@@ -196,7 +196,18 @@ a[href]:hover{ color:#1EFFF0; }
     grid-template-columns: 1fr;
     gap: .5rem;
   }
+
+/* Project pages on mobile: show only the bottom back chip */
+.is-project .project-head .project-back{ display: none; }        /* hide the top-right chip */
+.is-project .contacts-nav{ display: none; }                       /* hide the bottom contacts bar */
+.is-project .project-back-mobile{
+  display: inline-block;                                          /* show the bottom back chip */
+  margin: 1rem 0 1.25rem;                                         /* a bit of white space after */
 }
+}
+
+/* Default: hide the bottom back chip on larger screens */
+.is-project .project-back-mobile{ display: none; }
 
 
 /* ===== About page layout ===== */
