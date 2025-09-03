@@ -3,7 +3,7 @@
   --nav-right: 1rem;     /* distance from the right edge */
   --nav-bottom: 1rem;    /* distance from the bottom edge */
   --reserve-bottom: 0rem;/* set >0rem if you want to keep text from going under the nav */
-  --text-media-gap: 1rem;
+  --text-media-gap: 2rem;
 }
 
 main :is(p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6)
@@ -304,7 +304,7 @@ a[href]:hover{ color:#1EFFF0; }
   .is-about .about-photo img{ width: 100%; }
   .is-about .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
 
-  :root{ --text-media-gap: .75rem; }
+  :root{ --text-media-gap: 1rem; }
 
   .about-photo img{ width: 100%; }
   /*.about-cols{ grid-template-columns: 1fr; gap: .75rem; container-type: inline-size; }*/
