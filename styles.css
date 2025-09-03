@@ -3,7 +3,7 @@
   --nav-right: 1rem;     /* distance from the right edge */
   --nav-bottom: 1rem;    /* distance from the bottom edge */
   --reserve-bottom: 0rem;/* set >0rem if you want to keep text from going under the nav */
-  --text-media-gap: 2rem;
+  --text-media-gap: 10rem;
 }
 
 main :is(p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6)
