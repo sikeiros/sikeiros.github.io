@@ -288,7 +288,7 @@ a[href]:hover{ color:#1EFFF0; }
   .fake-link:not(.panel) .hover-card{ width: 70vw; }
 
   /* 5) About page stacking */
-  .about-grid{
+  .is-about .about-grid{
     grid-template-columns: 1fr;
     grid-template-areas:
       "nav"
@@ -296,6 +296,11 @@ a[href]:hover{ color:#1EFFF0; }
       "cols";
     gap: .75rem;
   }
+  .is-about .about-photo img{ width: 100%; }
+  .is-about .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
+
+
+
   .about-photo img{ width: 100%; }
   /*.about-cols{ grid-template-columns: 1fr; gap: .75rem; container-type: inline-size; }*/
   .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
