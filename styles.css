@@ -370,8 +370,10 @@ a[href]:hover{ color:#1EFFF0; }
 .about-cols{
   grid-area: cols;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
   gap: var(--about-col-gap);
+}
+@media (min-width:701px){
+  .about-cols{ grid-template-columns: repeat(3, minmax(0,1fr)); }
 }
 .about-col h2{
   margin: 0 0 .5em 0;
