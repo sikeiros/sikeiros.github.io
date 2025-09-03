@@ -3,8 +3,13 @@
   --nav-right: 1rem;     /* distance from the right edge */
   --nav-bottom: 1rem;    /* distance from the bottom edge */
   --reserve-bottom: 0rem;/* set >0rem if you want to keep text from going under the nav */
+  --text-media-gap: 1rem;
 }
 
+main :is(p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6)
+  + :is(figure, img, video){
+  margin-top: var(--text-media-gap);
+}
 
 @font-face{
   font-family: "MyExperimentalSans-Mono";
@@ -21,7 +26,7 @@ main, nav { margin: 0; padding: 0; }                        /* no inner margins 
 nav ul { list-style: none; margin: 0; padding: 0; }         /* remove UL default gaps */
 
 /* ==== Fluid desktop/tablet ==== */
-html { font-size: calc(100vw / 50); }            
+html { font-size: calc(100vw / 51); }            
 body {
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -299,7 +304,7 @@ a[href]:hover{ color:#1EFFF0; }
   .is-about .about-photo img{ width: 100%; }
   .is-about .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
 
-
+  :root{ --text-media-gap: .75rem; }
 
   .about-photo img{ width: 100%; }
   /*.about-cols{ grid-template-columns: 1fr; gap: .75rem; container-type: inline-size; }*/
@@ -324,7 +329,6 @@ a[href]:hover{ color:#1EFFF0; }
   margin: 1rem 0 1.25rem;                                         /* a bit of white space after */
 }
 }
-
 
 
 
