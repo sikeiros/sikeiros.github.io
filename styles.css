@@ -400,8 +400,9 @@ a.chip:focus-visible{
 
 /* === About page: smaller point size === */
 /* Desktop / tablet */
-html.is-about { font-size: calc(100vw / 61); }   /* bigger number = smaller text */
-
+@media (min-width:701px){
+  html.is-about { font-size: calc(100vw / 61); }   /* bigger number = smaller text */
+}
 
 /* ===== Simple project page tweaks (reusable) ===== */
 
