@@ -4,12 +4,17 @@
   --nav-bottom: 1rem;    /* distance from the bottom edge */
   --reserve-bottom: 0rem;/* set >0rem if you want to keep text from going under the nav */
   --text-media-gap: 1rem;
+  --about-photo-w: 22rem;   /* photo width on desktop/tablet */
+  --about-gap: 1rem;        /* spacing between blocks */
+  --about-col-gap: 1rem;    /* spacing between the three columns */
 }
 
-main :is(p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6)
-  + :is(figure, img, video){
-  margin-top: var(--text-media-gap);
-}
+/* Text → media spacing (works in <main> and .project wrappers) */
+ :is(main, .project)
+   :is(p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6)
+   + :is(figure, .project-figure, img, video){
+   margin-top: var(--text-media-gap);
+ }
 
 @font-face{
   font-family: "MyExperimentalSans-Mono";
@@ -165,14 +170,6 @@ a[href]:hover{ color:#1EFFF0; }
   color: #ffff67;             /* your yellow on hover */
 }
 
-/* Mobile tweaks: center + wider */
-@media (max-width:700px){
-  .fake-link.panel .hover-card{
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(90vw, 28rem);
-  }
-}
 
 /* keep the panel open as you move into it, and give it some room */
 .fake-link.panel{
@@ -257,7 +254,7 @@ a[href]:hover{ color:#1EFFF0; }
 /* ==== MOBILE SINGLE BLOCK ==== */
 @media (max-width: 700px){
   /* 1) Typography scale for all non-archive pages */
-  html { font-size: calc(100vw / 22); }   /* smaller divisor → bigger text */
+  html { font-size: calc(100vw / 18); }   /* smaller divisor → bigger text */
   body { line-height: 1.45; }
 
   /* 2) Bottom contacts nav (mobile layout) */
@@ -304,11 +301,25 @@ a[href]:hover{ color:#1EFFF0; }
   .is-about .about-photo img{ width: 100%; }
   .is-about .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
 
+  
+  .is-about .fake-link.panel{
+    display: block;                 /* wrapper spans the column */
+    position: relative;
+    padding-bottom: .25rem;         /* small tap/hover bridge */
+    -webkit-tap-highlight-color: transparent;
+  }
+  .is-about .fake-link.panel .hover-card{
+    position: static;               /* ← key: stop absolute positioning on phones */
+    left: auto; right: auto; top: auto;
+    transform: none;
+    width: 100%;                    /* fill this column */
+    margin: .35rem 0 .75rem;        /* small gap above, space below */
+    box-sizing: border-box;
+  }
+
+
   :root{ --text-media-gap: 1rem; }
 
-  .about-photo img{ width: 100%; }
-  /*.about-cols{ grid-template-columns: 1fr; gap: .75rem; container-type: inline-size; }*/
-  .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
 
   /* 6) Project page header stacks */
   .is-project .project{ grid-template-columns: 1fr; }
@@ -332,13 +343,6 @@ a[href]:hover{ color:#1EFFF0; }
 
 
 
-/* ===== About page layout ===== */
-:root{
-  /* Easy knobs (scale with your existing desktop/mobile type) */
-  --about-photo-w: 22rem;   /* photo width on desktop/tablet */
-  --about-gap: 1rem;        /* spacing between blocks */
-  --about-col-gap: 1rem;    /* spacing between the three columns */
-}
 
 /* Grid: top row = [nav | photo], second row = [three columns] */
 .about-grid{
@@ -409,11 +413,6 @@ a.chip:focus-visible{
 /* === About page: smaller point size === */
 /* Desktop / tablet */
 html.is-about { font-size: calc(100vw / 61); }   /* bigger number = smaller text */
-
-/* Mobile */
-@media (max-width: 700px){
-  html.is-about { font-size: calc(100vw / 22); } /* tweak this too if needed */
-}
 
 
 /* ===== Simple project page tweaks (reusable) ===== */
@@ -564,9 +563,8 @@ html.is-archive body{
   .is-archive .months{ margin: 0 0 2rem; }
 }
 
-/* ===== MOBILE SCENE: width < 900px ===== */
+/* ===== ARCHIVE mobile/tablet: width < 900px ======= */
 @media (max-width: 899.98px) {
-  /* 360px frame. 1rem = 100vw / 22.5 => frame == 100vw */
   html.is-archive { font-size: calc(100vw / 22.5); }                /* 360/16 = 22.5rem */
 
   .is-archive main{
@@ -658,9 +656,6 @@ html.is-archive body{
   color: var(--fg);
 }
 
-/*TEST
-@media (max-width:700px){
-  html{ outline: 4px solid hotpink !important; }
-}*/
+
 
 
