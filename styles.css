@@ -256,7 +256,7 @@ a[href]:hover{ color:#1EFFF0; }
 /* ==== MOBILE SINGLE BLOCK ==== */
 @media (max-width: 700px){
   /* 1) Typography scale for all non-archive pages */
-  html { font-size: calc(100vw / 5); }   /* smaller divisor → bigger text */
+  html { font-size: calc(100vw / 15); }   /* smaller divisor → bigger text */
   body { line-height: 1.45; }
 
   /* 2) Bottom contacts nav (mobile layout) */
@@ -304,22 +304,7 @@ a[href]:hover{ color:#1EFFF0; }
   .is-about .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
 
 
-  /*
-  .is-about .fake-link.panel{
-    display: block;                 
-    position: relative;
-    padding-bottom: .25rem;         
-    -webkit-tap-highlight-color: transparent;
-  }
-  .is-about .fake-link.panel .hover-card{
-    position: static;               
-    left: auto; right: auto; top: auto;
-    transform: none;
-    width: 100%;                   
-    margin: .35rem 0 .75rem;        
-    box-sizing: border-box;
-  }
-*/
+  
 
   :root{ --text-media-gap: 1rem; }
 
