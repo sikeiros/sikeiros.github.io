@@ -31,7 +31,7 @@ main, nav { margin: 0; padding: 0; }                        /* no inner margins 
 nav ul { list-style: none; margin: 0; padding: 0; }         /* remove UL default gaps */
 
 /* ==== Fluid desktop/tablet ==== */
-html { font-size: calc(100vw / 55); }            
+html { font-size: calc(100vw / 57); }            
 body {
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -195,8 +195,8 @@ a[href]:hover{ color:#1EFFF0; }
 /* === About page hover panel (keeps your existing fake-link behavior) === */
 .is-about .fake-link{
   position: relative;
-  display: inline-block;               /* keep in-flow, don’t break the line */
-  padding-bottom: .15em;         /* small “bridge” so hover doesn’t drop */
+  display: block;               /* keep in-flow, don’t break the line */
+  padding-bottom: .25em;         /* small “bridge” so hover doesn’t drop */
 }
 
 .is-about .fake-link .hover-card{
@@ -382,7 +382,7 @@ a[href]:hover{ color:#1EFFF0; }
   padding: 0;
 }
 .about-col li{ margin: 0 0 .4em 0; }
-.about-col{ container-type: inline-size; }
+.about-col{ container-type: inline-size; overflow: visible; }
 
 /* Reusable chip links */
 a.chip{
