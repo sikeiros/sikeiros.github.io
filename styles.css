@@ -31,7 +31,7 @@ main, nav { margin: 0; padding: 0; }                        /* no inner margins 
 nav ul { list-style: none; margin: 0; padding: 0; }         /* remove UL default gaps */
 
 /* ==== Fluid desktop/tablet ==== */
-html { font-size: calc(100vw / 40); }            
+html { font-size: calc(100vw / 55); }            
 body {
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
