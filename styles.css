@@ -245,7 +245,9 @@ a[href]:hover{ color:#1EFFF0; }
 
 /* Tidy list indentation in the panel */
 .is-about .fake-link.panel .hover-card ul{
-  padding-left: 1em;         /* smaller than browser default */
+  padding-left: 0;
+  margin-left: 0;
+  list-style: none;       
 }
 .is-about .fake-link.panel .hover-card li + li{
   margin-top: .2em;          /* compact list */
@@ -302,21 +304,22 @@ a[href]:hover{ color:#1EFFF0; }
   .is-about .about-cols{ grid-template-columns: 1fr; gap: .75rem; }
 
 
+  /*
   .is-about .fake-link.panel{
-    display: block;                 /* wrapper spans the column */
+    display: block;                 
     position: relative;
-    padding-bottom: .25rem;         /* small tap/hover bridge */
+    padding-bottom: .25rem;         
     -webkit-tap-highlight-color: transparent;
   }
   .is-about .fake-link.panel .hover-card{
-    position: static;               /* ← key: stop absolute positioning on phones */
+    position: static;               
     left: auto; right: auto; top: auto;
     transform: none;
-    width: 100%;                    /* fill this column */
-    margin: .35rem 0 .75rem;        /* small gap above, space below */
+    width: 100%;                   
+    margin: .35rem 0 .75rem;        
     box-sizing: border-box;
   }
-
+*/
 
   :root{ --text-media-gap: 1rem; }
 
