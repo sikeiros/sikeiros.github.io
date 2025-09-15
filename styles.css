@@ -31,7 +31,7 @@ main, nav { margin: 0; padding: 0; }                        /* no inner margins 
 nav ul { list-style: none; margin: 0; padding: 0; }         /* remove UL default gaps */
 
 /* ==== Fluid desktop/tablet ==== */
-html { font-size: calc(100vw / 57); }            
+html { font-size: calc(100vw / 50); }            
 body {
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -256,7 +256,7 @@ a[href]:hover{ color:#1EFFF0; }
 /* ==== MOBILE SINGLE BLOCK ==== */
 @media (max-width: 700px){
   /* 1) Typography scale for all non-archive pages */
-  html { font-size: calc(100vw / 15); }   /* smaller divisor → bigger text */
+  html { font-size: calc(100vw / 17); }   /* smaller divisor → bigger text */
   body { line-height: 1.45; }
 
   /* 2) Bottom contacts nav (mobile layout) */
