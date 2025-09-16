@@ -576,9 +576,12 @@ html.is-archive body{
   display: grid;
   grid-auto-flow: column;                      /* fill top→bottom by columns */
   grid-template-rows: repeat(2, auto);         /* two rows */
-  grid-auto-columns: minmax(8rem, 1fr);        /* each column ≥ 8rem */
+  grid-auto-columns: 1fr;
+  justify-content: stretch;
   gap: .5rem 1rem;                             /* row gap | column gap */
   align-items: start;
+  width: 100%;                                    /* 👈 span full width of main */
+  box-sizing: border-box;
 }
 
 /* Normalize link + placeholder typography (same look) */

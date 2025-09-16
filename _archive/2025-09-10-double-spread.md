@@ -10,7 +10,7 @@ caption: Full-width intro image caption.
 <!-- 2) Two images in a row (desktop), stack on mobile -->
 <div class="row-2">
   <figure>
-    <img src="/archive/img/02.png" alt="">
+    <img src="/archive/img/03.png" alt="">
     <figcaption>Left caption</figcaption>
   </figure>
   <figure>

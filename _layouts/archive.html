@@ -23,20 +23,45 @@ layout: base
 <main>
   <h1>Archive</h1>
 
-  <nav class="months" aria-label="Months">
-    {% assign first_clickable_done = false %}
-    {% for m in months %}
-      {% assign label = year | append: "-" | append: m %}
-      {% assign label_text = year | append: "/" | append: m %}
-      {% if present contains label %}
-        <a href="#{{ label }}"{% if first_clickable_done == false %} aria-current="true"{% assign first_clickable_done = true %}{% endif %}>
-          {{ label_text }}
-        </a>
-      {% else %}
-        <span aria-disabled="true">{{ label_text }}</span>
-      {% endif %}
-    {% endfor %}
-  </nav>
+  {% comment %} Full-year ribbon for latest year (Dec→Jan), interleaved per column {% endcomment %}
+{% assign entries = site.archive | sort: "date" | reverse %}
+{% assign latest  = entries | first %}
+{% assign year    = latest.date | date: "%Y" %}
+
+{% assign months  = "12,11,10,09,08,07,06,05,04,03,02,01" | split: "," %}
+{% assign present = "" | split: "" %}
+{% for it in entries %}
+  {% assign ym = it.date | date: "%Y-%m" %}
+  {% unless present contains ym %}
+    {% assign present = present | push: ym %}
+  {% endunless %}
+{% endfor %}
+
+<nav class="months" aria-label="Months">
+  {% assign first_done = false %}
+  {% for i in (0..5) %}
+    {% assign m_top = months | slice: i, 1 | first %}
+    {% assign m_bot_index = i | plus: 6 %}
+    {% assign m_bot = months | slice: m_bot_index, 1 | first %}
+
+    {%- assign ym_top = year | append: "-" | append: m_top -%}
+    {%- assign label_top = year | append: "/" | append: m_top -%}
+    {% if present contains ym_top %}
+      <a href="#{{ ym_top }}"{% unless first_done %} aria-current="true"{% assign first_done = true %}{% endunless %}>{{ label_top }}</a>
+    {% else %}
+      <span aria-disabled="true">{{ label_top }}</span>
+    {% endif %}
+
+    {%- assign ym_bot = year | append: "-" | append: m_bot -%}
+    {%- assign label_bot = year | append: "/" | append: m_bot -%}
+    {% if present contains ym_bot %}
+      <a href="#{{ ym_bot }}"{% unless first_done %} aria-current="true"{% assign first_done = true %}{% endunless %}>{{ label_bot }}</a>
+    {% else %}
+      <span aria-disabled="true">{{ label_bot }}</span>
+    {% endif %}
+  {% endfor %}
+</nav>
+
 
   {% comment %} Stream grouped by month, newest→oldest (matches your old HTML) {% endcomment %}
   {% assign current = "" %}
