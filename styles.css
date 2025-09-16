@@ -499,62 +499,61 @@ html{
 body{ font-weight: 500; }
 
 
-/* =========================================================
-   ARCHIVE PAGE (scoped): append this to the end of styles.css
-   Requires <html class="is-archive"> in /archive/index.html
-   ========================================================= */
+/* ================================
+   ARCHIVE (scoped to html.is-archive)
+   ================================ */
 
-/* Variables / base just for the archive page */
+/* Knobs, colors, corners */
 html.is-archive{
-  /* frame + typography knobs */
-  --content: 70rem;                    /* ≈1120px */
-  --gutter:  3.6rem;                   /* side padding ≈64px */
-  --frame:   calc(var(--content) + 2*var(--gutter));
-  --space:   1.25rem;                  /* ≈20px base spacing */
+  --content: 70rem;                 /* ≈1120px max content */
+  --gutter: 3.6rem;                 /* side padding */
+  --frame:  calc(var(--content) + 2*var(--gutter));
+  --space:  1.25rem;                /* base spacing */
 
-  /* colors */
   --fg:#111;
   --muted:#777;
   --rule:#e7e7e7;
 
-  /* corners */
-  --br: 12px;
+  --br:12px;
 }
 
-/* Archive body face & base line-height (keeps your look) */
+/* Face + base rhythm (shared for all breakpoints) */
 html.is-archive body{
   margin: 0;
   color: var(--fg);
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   line-height: 1.55;
+
+  /* one place for the body scale (rem-based so it follows html size) */
+  font-size: 1.9167rem;            /* ≈30.7px when html=16px */
 }
 
-/* ===== DESKTOP SCENE: width >= 900px ===== */
-@media (min-width: 900px) {
-  /* 1080px frame. 1rem = 100vw / 67.5 => frame == 100vw */
-  html.is-archive { font-size: calc(100vw / 67.5); }               /* 1080/16 = 67.5rem */
+/* Headings & caption sizes (set once) */
+.is-archive h1{ font-size: 2.085em; margin: 0 0 .1em; text-align: center; }
+.is-archive h2{ font-size: 1.107em; margin: 0 0 .35em; }
+.is-archive .story figcaption{ font-size: .455em; text-align: center; margin-top: .35em; }
+.is-archive .note{ color:#444; margin-top:.5rem; font-size:.55em; }
+
+/* ===== DESKTOP/TABLET (≥900px) ===== */
+@media (min-width:900px){
+  /* 1080px frame. 1rem = 100vw / 67.5 ⇒ frame == 100vw */
+  html.is-archive{ font-size: calc(100vw / 67.5); }  /* 1080/16 = 67.5rem */
 
   .is-archive main{
-    width: 67.5rem;                                                 /* frame */
-    padding: 0 4rem 0;                                              /* top | sides | bottom */
-    margin: 0 auto 6rem;
+    width: 67.5rem;                 /* frame width */
     box-sizing: border-box;
+    padding: 0 4rem;                 /* top | sides (no bottom) */
+    margin: 0 auto 6rem;
   }
 
-  /* Type sizes (from your file) */
-  .is-archive body { font-size: 1.9167rem; }                        /* ≈30.7px */
-  .is-archive h1 { font-size: 2.085em; margin: 0 0 0.1em; text-align: center; }
-  .is-archive h2 { font-size: 1.107em; margin: 0 0 0.35em; }
-  .is-archive .story figcaption { font-size: .455em; text-align: center; margin-top: .35em; } /* ≈14px */
-  .is-archive .note { font-size: .55em; }
-
-  /* Months spacing (your comment said ~var(--space)*.8) */
+  /* Month ribbon spacing on desktop */
   .is-archive .months{ margin: 0 0 2rem; }
 }
 
-/* ===== ARCHIVE mobile/tablet: width < 900px ======= */
-@media (max-width: 899.98px) {
-  html.is-archive { font-size: calc(100vw / 22.5); }                /* 360/16 = 22.5rem */
+/* ===== MOBILE/TABLET (≤899.98px) ===== */
+@media (max-width:899.98px){
+  /* 360px frame. 1rem = 100vw / 22.5 ⇒ frame == 100vw */
+  html.is-archive{ font-size: calc(100vw / 22.5); }  /* 360/16 = 22.5rem */
 
   .is-archive main{
     width: 20.5rem;
@@ -562,82 +561,76 @@ html.is-archive body{
     padding-inline: 1rem;
   }
 
-  .is-archive body { font-size: 1.9167rem; }
-  .is-archive h1 { font-size: 2.085em; margin: 0 0 0.7em; text-align: center; }
-  .is-archive h2 { font-size: 1.107em; margin: 0 0 0.35em; }
-  .is-archive .story figcaption { font-size: .455em; text-align: center; margin-top: .35em; }
+  /* Slightly larger gap under H1 on mobile */
+  .is-archive h1{ margin: 0 0 .7em; }
 
-  /* Two-up rows collapse to one column on phones */
-  .is-archive .row-2 { grid-template-columns: 1fr; }
+  /* Two-up rows collapse on phones */
+  .is-archive .row-2{ grid-template-columns: 1fr; }
 }
 
-/* ===== Archive components (scoped) ===== */
+/* ===== Archive components ===== */
 
-/* Months ribbon: last-first ordering emphasis */
+/* Months ribbon (2 rows by default; fill by columns) */
 .is-archive .months{
   position: static !important;
-
   display: grid;
-  grid-auto-flow: column;                         /* fill by columns, top→bottom */
-  grid-template-rows: repeat(2, auto);            /* two rows by default */
-  grid-auto-columns: minmax(8rem, 1fr);           /* ≥8rem, share the width */
-  gap: .5rem 1rem;                                /* row gap | column gap */
+  grid-auto-flow: column;                      /* fill top→bottom by columns */
+  grid-template-rows: repeat(2, auto);         /* two rows */
+  grid-auto-columns: minmax(8rem, 1fr);        /* each column ≥ 8rem */
+  gap: .5rem 1rem;                             /* row gap | column gap */
   align-items: start;
 }
-.is-archive .months a{
+
+/* Normalize link + placeholder typography (same look) */
+.is-archive .months a,
+.is-archive .months span{
   text-decoration: none;
   color: var(--fg);
-  opacity: .35;
   letter-spacing: .02em;
-  font-size: 1rem;                                /* base */
-  white-space: nowrap;                            /* keep 2025/08 together */
-
-  /* 👇 add these so months are plain links (not yellow/blue chips) */
-  background: transparent !important;
-  padding: 0 !important;
-  border-radius: 0 !important;                         /* keep 2025/08 together */
-}
-.is-archive .months a:first-child,
-.is-archive .months a[aria-current="true"]{
-  opacity: 1;
-}
-/* If 17+ months, switch to 3 rows */
-.is-archive .months:has(a:nth-child(n+17)){
-  grid-template-rows: repeat(3, auto);
+  font-size: 1rem;                             /* keep month labels consistent */
+  white-space: nowrap;
 }
 
-/* Story stream */
-.is-archive .story{ display:grid; gap:var(--space); }
-.is-archive .story figure{ margin:0; }
+/* Links: default muted; highlight current */
+.is-archive .months a{ opacity: .35; background: transparent !important; padding: 0 !important; border-radius: 0 !important; }
+.is-archive .months a[aria-current="true"]{ opacity: 1; }  /* remove :first-child so spans don’t break highlight */
+
+/* Placeholders (months with no entries) */
+.is-archive .months span{
+  opacity: .25;
+  pointer-events: none;                        /* inert */
+}
+
+/* If 17+ months ever appear, switch to 3 rows */
+.is-archive .months:has(a:nth-child(n+17)){ grid-template-rows: repeat(3, auto); }
+
+/* Stream */
+.is-archive .story{ display: grid; gap: var(--space); }
+.is-archive .story figure{ margin: 0; }
 .is-archive .story img,
 .is-archive .story video{
-  width:100%; height:auto; display:block; border-radius:var(--br);
+  width: 100%; height: auto; display: block; border-radius: var(--br);
 }
-.is-archive .story figcaption{ color:#555; margin-top:.375rem; text-align:center; }
 
-/* Two-up row (desktop) */
+/* Two-up row (desktop base) */
 .is-archive .row-2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:var(--space);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space);
   align-items: start;
 }
-.is-archive .row-2 > *{ min-width:0; }           /* prevent stretch */
+.is-archive .row-2 > *{ min-width: 0; }        /* prevent stretch */
+.is-archive .row-2 figcaption{ text-align: center; }
 
-/* Misc text bits */
-.is-archive .note{ color:#444; margin-top:.5rem; }
-.is-archive .footer{ margin-top:2.25rem; font-size:.8125rem; color:#777; }
+/* Footer */
+.is-archive .footer{ margin-top: 2.25rem; color:#777; font-size:.8125rem; }
 
-/* Center captions in all contexts */
-.is-archive .row-2 figcaption{ text-align:center; }
-
-/* ARCHIVE: make all non-contacts navs plain and not fixed */
+/* Make all non-contacts navs plain and not fixed within the archive */
 .is-archive nav:not(.contacts-nav){
   position: static !important;
-  inset: auto !important;   /* cancels top/right/bottom/left if something set them */
+  inset: auto !important;
   width: auto;
 }
-
 .is-archive nav:not(.contacts-nav) a[href]{
   background: transparent !important;
   padding: 0 !important;
@@ -645,16 +638,5 @@ html.is-archive body{
   color: var(--fg);
 }
 
-
-/* Non-clickable months (placeholders) */
-.is-archive .months span{
-  opacity: .25;                 /* or .35 if you prefer */
-  pointer-events: none;         /* not clickable */
-  text-decoration: none;
-  background: transparent !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  color: var(--fg);
-}
 
 
