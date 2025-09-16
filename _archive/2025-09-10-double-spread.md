@@ -4,7 +4,7 @@ date: 2025-09-10
 row: row-2
 ---
 <figure>
-  <img src="/archive/img/01.jpg" alt="">
+  <img src="/archive/img/01.png" alt="">
   <figcaption>Left</figcaption>
 </figure>
 <figure>

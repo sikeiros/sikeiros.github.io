@@ -1,32 +1,43 @@
 ---
 layout: base
 ---
+{%- comment -%}
+  Build a unique months array from items (newest → oldest)
+{%- endcomment -%}
+{%- assign entries = site.archive | sort: "date" | reverse -%}
+{%- assign months = "" | split: "" -%}
+{%- for item in entries -%}
+  {%- assign label = item.date | date: "%Y/%m" -%}
+  {%- assign id    = item.date | date: "%Y%m"   -%}  {# e.g., 202509 #}
+  {%- unless months contains id -%}
+    {%- assign months = months | push: id -%}
+  {%- endunless -%}
+{%- endfor -%}
+
 <main class="is-archive" aria-label="Archive">
-  <!-- Months ribbon (YYYY/MM) -->
+  <!-- Months ribbon (clickable anchors) -->
   <div class="months">
-    {%- assign labels = "" | split: "" -%}
-    {%- assign dates = site.archive | map:'date' | sort | reverse -%}
-    {%- for d in dates -%}
-      {%- assign m = d | date: "%Y/%m" -%}
-      {%- unless labels contains m -%}
-        <a href="#{{ m }}">{{ m }}</a>
-        {%- assign labels = labels | push: m -%}
-      {%- endunless -%}
+    {%- for id in months -%}
+      {%- assign y  = id | slice: 0,4 -%}
+      {%- assign m  = id | slice: 4,2 -%}
+      {%- assign label = y | append: "/" | append: m -%}
+      <a href="#y{{ id }}">{{ label }}</a>
     {%- endfor -%}
   </div>
 
-  <!-- Stream newest → oldest -->
+  <!-- Stream (newest → oldest) -->
   <section class="story">
-    {%- assign items = site.archive | sort: 'date' | reverse -%}
-    {%- assign prev_month = "" -%}
-    {%- for item in items -%}
-      {%- assign month_id = item.date | date: "%Y/%m" -%}
-      {%- if month_id != prev_month -%}
-        <h2 id="{{ month_id }}">{{ month_id }}</h2>
-        {%- assign prev_month = month_id -%}
+    {%- assign prev = "" -%}
+    {%- for item in entries -%}
+      {%- assign month_id = item.date | date: "%Y%m" -%}
+      {%- assign label    = item.date | date: "%Y/%m" -%}
+
+      {%- if month_id != prev -%}
+        <h2 id="y{{ month_id }}">{{ label }}</h2>
+        {%- assign prev = month_id -%}
       {%- endif -%}
 
-      {{ item.content }}  <!-- injected from archive_item layout -->
+      {{ item.content }}  <!-- archive_item layout renders content/figures -->
     {%- endfor -%}
   </section>
 </main>
