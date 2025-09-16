@@ -2,11 +2,22 @@
 layout: null
 ---
 <article class="{{ page.row | default: '' }}">
-  {%- if page.figure -%}
-  <figure>
-    <img src="{{ page.figure | relative_url }}" alt="{{ page.alt | default: '' }}">
-    {%- if page.caption -%}<figcaption>{{ page.caption }}</figcaption>{%- endif -%}
-  </figure>
-  {%- endif -%}
-  {{ content }}  <!-- optional extra HTML/Markdown per item -->
+  {% if page.figure %}
+    <figure>
+      <img src="{{ page.figure | relative_url }}" alt="{{ page.alt | default: '' }}">
+      {% if page.caption %}<figcaption>{{ page.caption }}</figcaption>{% endif %}
+    </figure>
+  {% endif %}
+
+  {% if page.row == "row-2" %}
+    <div class="row-2">
+      {{ content }}
+    </div>
+  {% else %}
+    {{ content }}
+  {% endif %}
+
+  {% if page.note %}
+    <div class="note">{{ page.note }}</div>
+  {% endif %}
 </article>

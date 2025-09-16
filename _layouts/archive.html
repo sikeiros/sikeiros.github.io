@@ -1,39 +1,58 @@
 ---
 layout: base
 ---
-{% comment %} Build newest→oldest list of months as YYYY-MM {% endcomment %}
+{% comment %} Build newest→oldest list of items {% endcomment %}
 {% assign entries = site.archive | sort: "date" | reverse %}
-{% assign months  = "" | split: "" %}
+
+{% comment %} Determine the year to show (latest item’s year) {% endcomment %}
+{% assign latest = entries | first %}
+{% assign year   = latest.date | date: "%Y" %}
+
+{% comment %} Make a set of year-month labels that actually exist (e.g., 2025-09) {% endcomment %}
+{% assign present = "" | split: "" %}
 {% for item in entries %}
-  {% assign label = item.date | date: "%Y-%m" %}
-  {% unless months contains label %}
-    {% assign months = months | push: label %}
+  {% assign ym = item.date | date: "%Y-%m" %}
+  {% unless present contains ym %}
+    {% assign present = present | push: ym %}
   {% endunless %}
 {% endfor %}
+
+{% comment %} Build a 12-month ribbon for that year (Dec→Jan so newest is first) {% endcomment %}
+{% assign months = "12,11,10,09,08,07,06,05,04,03,02,01" | split: "," %}
 
 <main>
   <h1>Archive</h1>
 
   <nav class="months" aria-label="Months">
+    {% assign first_clickable_done = false %}
     {% for m in months %}
-      <a href="#{{ m }}"{% if forloop.first %} aria-current="true"{% endif %}>
-        {{ m | replace: "-", "/" }}
-      </a>
+      {% assign label = year | append: "-" | append: m %}
+      {% assign label_text = year | append: "/" | append: m %}
+      {% if present contains label %}
+        <a href="#{{ label }}"{% if first_clickable_done == false %} aria-current="true"{% assign first_clickable_done = true %}{% endif %}>
+          {{ label_text }}
+        </a>
+      {% else %}
+        <span aria-disabled="true">{{ label_text }}</span>
+      {% endif %}
     {% endfor %}
   </nav>
 
-  {% comment %} Stream grouped by month (matches your old HTML) {% endcomment %}
+  {% comment %} Stream grouped by month, newest→oldest (matches your old HTML) {% endcomment %}
   {% assign current = "" %}
   {% for item in entries %}
-    {% assign month_id = item.date | date: "%Y-%m" %}
+    {% assign month_id    = item.date | date: "%Y-%m" %}
+    {% assign month_label = item.date | date: "%Y/%m" %}
+
     {% if month_id != current %}
       {% if current != "" %}</div></div>{% endif %}
       <div id="{{ month_id }}" class="month">
+        <h2>{{ month_label }}</h2>
         <div class="story">
       {% assign current = month_id %}
     {% endif %}
 
-    {{ item.content }}  {# each item (article/figures) prints here #}
+    {{ item.content }}
 
   {% endfor %}
   {% if current != "" %}</div></div>{% endif %}
