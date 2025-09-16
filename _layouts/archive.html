@@ -1,43 +1,45 @@
 ---
 layout: base
 ---
-{%- comment -%}
-  Build a unique months array from items (newest → oldest)
-{%- endcomment -%}
-{%- assign entries = site.archive | sort: "date" | reverse -%}
-{%- assign months = "" | split: "" -%}
-{%- for item in entries -%}
-  {%- assign label = item.date | date: "%Y/%m" -%}
-  {%- assign id    = item.date | date: "%Y%m"   -%}  {# e.g., 202509 #}
-  {%- unless months contains id -%}
-    {%- assign months = months | push: id -%}
-  {%- endunless -%}
-{%- endfor -%}
+{% comment %} Build newest→oldest list of months as YYYY-MM {% endcomment %}
+{% assign entries = site.archive | sort: "date" | reverse %}
+{% assign months  = "" | split: "" %}
+{% for item in entries %}
+  {% assign label = item.date | date: "%Y-%m" %}
+  {% unless months contains label %}
+    {% assign months = months | push: label %}
+  {% endunless %}
+{% endfor %}
 
-<main class="is-archive" aria-label="Archive">
-  <!-- Months ribbon (clickable anchors) -->
-  <div class="months">
-    {%- for id in months -%}
-      {%- assign y  = id | slice: 0,4 -%}
-      {%- assign m  = id | slice: 4,2 -%}
-      {%- assign label = y | append: "/" | append: m -%}
-      <a href="#y{{ id }}">{{ label }}</a>
-    {%- endfor -%}
+<main>
+  <h1>Archive</h1>
+
+  <nav class="months" aria-label="Months">
+    {% for m in months %}
+      <a href="#{{ m }}"{% if forloop.first %} aria-current="true"{% endif %}>
+        {{ m | replace: "-", "/" }}
+      </a>
+    {% endfor %}
+  </nav>
+
+  {% comment %} Stream grouped by month (matches your old HTML) {% endcomment %}
+  {% assign current = "" %}
+  {% for item in entries %}
+    {% assign month_id = item.date | date: "%Y-%m" %}
+    {% if month_id != current %}
+      {% if current != "" %}</div></div>{% endif %}
+      <div id="{{ month_id }}" class="month">
+        <div class="story">
+      {% assign current = month_id %}
+    {% endif %}
+
+    {{ item.content }}  {# each item (article/figures) prints here #}
+
+  {% endfor %}
+  {% if current != "" %}</div></div>{% endif %}
+
+  <div class="footer">
+    This is a live archive of works, thoughts, screenshots. Nothing final, the process.
+    Code: MIT. Text &amp; images: CC BY-NC-ND 4.0.
   </div>
-
-  <!-- Stream (newest → oldest) -->
-  <section class="story">
-    {%- assign prev = "" -%}
-    {%- for item in entries -%}
-      {%- assign month_id = item.date | date: "%Y%m" -%}
-      {%- assign label    = item.date | date: "%Y/%m" -%}
-
-      {%- if month_id != prev -%}
-        <h2 id="y{{ month_id }}">{{ label }}</h2>
-        {%- assign prev = month_id -%}
-      {%- endif -%}
-
-      {{ item.content }}  <!-- archive_item layout renders content/figures -->
-    {%- endfor -%}
-  </section>
 </main>
