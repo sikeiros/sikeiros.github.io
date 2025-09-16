@@ -1,7 +1,10 @@
 ---
 layout: null
 ---
-<article class="{{ page.row | default: '' }}">
+<article>
+  {% if page.title %}<h3 class="entry-title">{{ page.title }}</h3>{% endif %}
+  {% if page.intro %}<p class="entry-intro">{{ page.intro }}</p>{% endif %}
+
   {% if page.figure %}
     <figure>
       <img src="{{ page.figure | relative_url }}" alt="{{ page.alt | default: '' }}">
@@ -9,15 +12,5 @@ layout: null
     </figure>
   {% endif %}
 
-  {% if page.row == "row-2" %}
-    <div class="row-2">
-      {{ content }}
-    </div>
-  {% else %}
-    {{ content }}
-  {% endif %}
-
-  {% if page.note %}
-    <div class="note">{{ page.note }}</div>
-  {% endif %}
+  {{ content }}  <!-- put your two-up block (and any extra text) here -->
 </article>
