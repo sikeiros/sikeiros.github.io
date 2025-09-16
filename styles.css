@@ -646,5 +646,15 @@ html.is-archive body{
 }
 
 
+/* Non-clickable months (placeholders) */
+.is-archive .months span{
+  opacity: .25;                 /* or .35 if you prefer */
+  pointer-events: none;         /* not clickable */
+  text-decoration: none;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  color: var(--fg);
+}
 
 
