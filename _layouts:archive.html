@@ -1,0 +1,32 @@
+---
+layout: base
+---
+<main class="is-archive" aria-label="Archive">
+  <!-- Months ribbon (YYYY/MM) -->
+  <div class="months">
+    {%- assign labels = "" | split: "" -%}
+    {%- assign dates = site.archive | map:'date' | sort | reverse -%}
+    {%- for d in dates -%}
+      {%- assign m = d | date: "%Y/%m" -%}
+      {%- unless labels contains m -%}
+        <a href="#{{ m }}">{{ m }}</a>
+        {%- assign labels = labels | push: m -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+
+  <!-- Stream newest → oldest -->
+  <section class="story">
+    {%- assign items = site.archive | sort: 'date' | reverse -%}
+    {%- assign prev_month = "" -%}
+    {%- for item in items -%}
+      {%- assign month_id = item.date | date: "%Y/%m" -%}
+      {%- if month_id != prev_month -%}
+        <h2 id="{{ month_id }}">{{ month_id }}</h2>
+        {%- assign prev_month = month_id -%}
+      {%- endif -%}
+
+      {{ item.content }}  <!-- injected from archive_item layout -->
+    {%- endfor -%}
+  </section>
+</main>

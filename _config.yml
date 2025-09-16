@@ -1,0 +1,16 @@
+title: Anya
+url: https://sikeiros.github.io   # change to your custom domain later
+baseurl: ""                       # keep empty at the repo root
+
+collections:
+  archive:
+    output: true                  # write pages for each item
+    permalink: /archive/:slug/    # item URLs (optional but nice)
+
+# Default layout for archive items (optional convenience)
+defaults:
+  - scope:
+      path: ""
+      type: archive
+    values:
+      layout: archive_item

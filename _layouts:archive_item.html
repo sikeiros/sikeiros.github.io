@@ -1,0 +1,12 @@
+---
+layout: null
+---
+<article class="{{ page.row | default: '' }}">
+  {%- if page.figure -%}
+  <figure>
+    <img src="{{ page.figure | relative_url }}" alt="{{ page.alt | default: '' }}">
+    {%- if page.caption -%}<figcaption>{{ page.caption }}</figcaption>{%- endif -%}
+  </figure>
+  {%- endif -%}
+  {{ content }}  <!-- optional extra HTML/Markdown per item -->
+</article>
