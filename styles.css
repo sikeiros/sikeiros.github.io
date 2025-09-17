@@ -542,7 +542,7 @@ html.is-archive body{
   .is-archive main{
     width: 67.5rem;                 /* frame width */
     box-sizing: border-box;
-    padding: 0 4rem;                 /* top | sides (no bottom) */
+    padding: 0 5rem;                 /* top | sides (no bottom) */
     margin: 0 auto 6rem;
   }
 
@@ -553,7 +553,7 @@ html.is-archive body{
 /* ===== MOBILE/TABLET (≤899.98px) ===== */
 @media (max-width:899.98px){
   /* 360px frame. 1rem = 100vw / 22.5 ⇒ frame == 100vw */
-  html.is-archive{ font-size: calc(100vw / 22.5); }  /* 360/16 = 22.5rem */
+  html.is-archive{ font-size: calc(100vw / 30); }  /* 360/16 = 22.5rem */
 
   .is-archive main{
     width: 20.5rem;
@@ -641,6 +641,11 @@ html.is-archive body{
   border-radius: 0 !important;
   color: var(--fg);
 }
-
+/* Collapse all two-up grids on mobile */
+.row-2,
+.project-pair {
+  grid-template-columns: 1fr !important;
+  gap: .5rem; /* tweak if you want tighter/looser */
+}
 
 

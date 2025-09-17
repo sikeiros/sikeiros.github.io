@@ -1,6 +1,6 @@
 ---
 layout: archive_item
-title: Double spread
+title: September process
 date: 2025-09-10
 intro: Short intro text for this entry goes here.
 figure: /archive/img/01.png
