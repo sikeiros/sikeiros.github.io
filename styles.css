@@ -522,12 +522,12 @@ html.is-archive body{
   color: var(--fg);
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   line-height: 1.55;
-  font-size: 1.9167rem;                 /* ≈30.7px (23pt) */
+  font-size: 1rem;                 /* ≈30.7px (23pt) */
 }
 
 /* Sizes per spec (at 1080) — expressed in rem so they scale */
 .is-archive h1{                          /* “Archive” page title: 59pt ≈ 78.5px */
-  font-size: 4.9rem;                     /* 78.5 / 16 */
+  font-size: 4rem;                     /* 78.5 / 16 */
   margin: 0 0 .6em;
   text-align: center;
 }
@@ -544,14 +544,14 @@ html.is-archive body{
   margin: 0 0 .5em;
 }
 .is-archive .entry-title{                 /* post title: 28pt ≈ 37.3px */
-  font-size: 2.33rem;
+  font-size: 2rem;
   margin: 0 0 .4em;
 }
 .is-archive .entry-intro{                 /* intro paragraph == body size */
   margin: 0 0 .9em;
 }
 .is-archive .story figcaption{            /* captions: 18pt ≈ 24px */
-  font-size: 1.5rem;
+  font-size: 0.5rem;
   text-align:center;
   margin-top:.35em;
 }
@@ -560,7 +560,7 @@ html.is-archive body{
 /* ===== DESKTOP/TABLET (≥900px) ===== */
 @media (min-width:900px){
   /* make 1rem scale so --frame == viewport width at 1080 */
-  html.is-archive{ font-size: calc(100vw / 67.5); }
+  html.is-archive{ font-size: calc(100vw / 61); }
 
   .is-archive main{
     width: var(--frame);
@@ -577,7 +577,7 @@ html.is-archive body{
 /* ===== MOBILE/TABLET (≤899.98px) ===== */
 @media (max-width:899.98px){
   /* keep your existing mobile scale; we’ll tune later */
-  html.is-archive{ font-size: calc(100vw / 30); }
+  html.is-archive{ font-size: calc(100vw / 17); }
 
   .is-archive main{
     width: 20.5rem;
