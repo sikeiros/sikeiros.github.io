@@ -519,6 +519,7 @@ html.is-archive{
 /* Base face + rhythm (body 23pt at 1080) */
 html.is-archive body{
   margin: 0;
+  padding: 0;
   color: var(--fg);
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   line-height: 1.55;
@@ -528,7 +529,7 @@ html.is-archive body{
 /* Sizes per spec (at 1080) — expressed in rem so they scale */
 .is-archive h1{                          /* “Archive” page title: 59pt ≈ 78.5px */
   font-size: 4rem;                     /* 78.5 / 16 */
-  margin: 0 0 .6em;
+  margin: 0 0 .3em;
   text-align: center;
 }
 .is-archive .months a,
@@ -556,6 +557,16 @@ html.is-archive body{
   margin-top:.35em;
 }
 .is-archive .note{ color:#444; margin-top:.5rem; font-size:.55em; }
+
+/* Space from the full-width figure to the following two-up row */
+.is-archive article figure + .row-2{
+  margin-top: var(--space);
+}
+
+/* General in-article stacking (keeps things from touching) */
+.is-archive article > * + *{
+  margin-top: var(--space);
+}
 
 /* ===== DESKTOP/TABLET (≥900px) ===== */
 @media (min-width:900px){
