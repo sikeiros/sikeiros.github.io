@@ -503,57 +503,81 @@ body{ font-weight: 500; }
    ARCHIVE (scoped to html.is-archive)
    ================================ */
 
-/* Knobs, colors, corners */
+/* knobs & frame */
 html.is-archive{
-  --content: 70rem;                 /* ≈1120px max content */
-  --gutter: 3.6rem;                 /* side padding */
-  --frame:  calc(var(--content) + 2*var(--gutter));
-  --space:  1.25rem;                /* base spacing */
+  /* FRAME at 1080 → 67.5rem; CONTENT target ≈ 860px → 53.75rem */
+  --frame:   67.5rem;
+  --content: 53.75rem;
+  --space:   1.25rem;
 
   --fg:#111;
   --muted:#777;
   --rule:#e7e7e7;
-
   --br:12px;
 }
 
-/* Face + base rhythm (shared for all breakpoints) */
+/* Base face + rhythm (body 23pt at 1080) */
 html.is-archive body{
   margin: 0;
   color: var(--fg);
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   line-height: 1.55;
-
-  /* one place for the body scale (rem-based so it follows html size) */
-  font-size: 1.9167rem;            /* ≈30.7px when html=16px */
+  font-size: 1.9167rem;                 /* ≈30.7px (23pt) */
 }
 
-/* Headings & caption sizes (set once) */
-.is-archive h1{ font-size: 2.085em; margin: 0 0 .1em; text-align: center; }
-.is-archive h2{ font-size: 1.107em; margin: 0 0 .35em; }
-.is-archive .story figcaption{ font-size: .455em; text-align: center; margin-top: .35em; }
+/* Sizes per spec (at 1080) — expressed in rem so they scale */
+.is-archive h1{                          /* “Archive” page title: 59pt ≈ 78.5px */
+  font-size: 4.9rem;                     /* 78.5 / 16 */
+  margin: 0 0 .6em;
+  text-align: center;
+}
+.is-archive .months a,
+.is-archive .months span{                 /* month ribbon: 18pt ≈ 24px */
+  font-size: 1.5rem;
+}
+.is-archive .date-chip{                   /* exact day tag: 23pt (body size) */
+  display:inline-block;
+  background:#1EFFF0;
+  color:#000;
+  padding:.15em .35em;
+  line-height:1;                          /* snug chip */
+  margin: 0 0 .5em;
+}
+.is-archive .entry-title{                 /* post title: 28pt ≈ 37.3px */
+  font-size: 2.33rem;
+  margin: 0 0 .4em;
+}
+.is-archive .entry-intro{                 /* intro paragraph == body size */
+  margin: 0 0 .9em;
+}
+.is-archive .story figcaption{            /* captions: 18pt ≈ 24px */
+  font-size: 1.5rem;
+  text-align:center;
+  margin-top:.35em;
+}
 .is-archive .note{ color:#444; margin-top:.5rem; font-size:.55em; }
 
 /* ===== DESKTOP/TABLET (≥900px) ===== */
 @media (min-width:900px){
-  /* 1080px frame. 1rem = 100vw / 67.5 ⇒ frame == 100vw */
-  html.is-archive{ font-size: calc(100vw / 67.5); }  /* 1080/16 = 67.5rem */
+  /* make 1rem scale so --frame == viewport width at 1080 */
+  html.is-archive{ font-size: calc(100vw / 67.5); }
 
   .is-archive main{
-    width: 67.5rem;                 /* frame width */
+    width: var(--frame);
     box-sizing: border-box;
-    padding: 0 5rem;                 /* top | sides (no bottom) */
+    /* center content to ≈860px inside the frame */
+    padding-left:  calc((var(--frame) - var(--content)) / 2);
+    padding-right: calc((var(--frame) - var(--content)) / 2);
     margin: 0 auto 6rem;
   }
 
-  /* Month ribbon spacing on desktop */
   .is-archive .months{ margin: 0 0 2rem; }
 }
 
 /* ===== MOBILE/TABLET (≤899.98px) ===== */
 @media (max-width:899.98px){
-  /* 360px frame. 1rem = 100vw / 22.5 ⇒ frame == 100vw */
-  html.is-archive{ font-size: calc(100vw / 30); }  /* 360/16 = 22.5rem */
+  /* keep your existing mobile scale; we’ll tune later */
+  html.is-archive{ font-size: calc(100vw / 30); }
 
   .is-archive main{
     width: 20.5rem;
@@ -561,91 +585,64 @@ html.is-archive body{
     padding-inline: 1rem;
   }
 
-  /* Slightly larger gap under H1 on mobile */
   .is-archive h1{ margin: 0 0 .7em; }
-
-  /* Two-up rows collapse on phones */
-  .is-archive .row-2{ grid-template-columns: 1fr; }
+  .is-archive .row-2{ grid-template-columns: 1fr; } /* two-up → one column */
 }
 
-/* ===== Archive components ===== */
+/* ===== Components ===== */
 
-/* Months ribbon (2 rows by default; fill by columns) */
+/* Months ribbon — fixed 6 columns, fills content width, right-aligned cells */
 .is-archive .months{
   position: static !important;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);   /* ← six equal columns */
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(2, auto);
-  grid-auto-flow: column;         /* two rows */
-  justify-items: end;                          /* row gap | column gap */
+  grid-auto-flow: column;                 /* fill top→bottom per column */
+  justify-items: end;                     /* labels hug right edge of cells */
   align-items: start;
-  gap: .5rem 1rem;   
-  width: 100%;                                    /* 👈 span full width of main */
+  gap: .5rem 1rem;
+  width: 100%;
   box-sizing: border-box;
 }
 
-/* Normalize link + placeholder typography (same look) */
+/* Shared link/placeholder look */
 .is-archive .months a,
 .is-archive .months span{
-  display: block;
+  display:block;
   text-decoration: none;
   color: var(--fg);
   letter-spacing: .02em;
-  font-size: 1rem;                             /* keep month labels consistent */
   white-space: nowrap;
 }
+.is-archive .months a{ opacity:.35; background:transparent !important; padding:0 !important; border-radius:0 !important; }
+.is-archive .months a[aria-current="true"]{ opacity:1; }
+.is-archive .months span{ opacity:.25; pointer-events:none; }
 
-/* Links: default muted; highlight current */
-.is-archive .months a{ opacity: .35; background: transparent !important; padding: 0 !important; border-radius: 0 !important; }
-.is-archive .months a[aria-current="true"]{ opacity: 1; }  /* remove :first-child so spans don’t break highlight */
-
-/* Placeholders (months with no entries) */
-.is-archive .months span{
-  opacity: .25;
-  pointer-events: none;                        /* inert */
-}
-
-/* If 17+ months ever appear, switch to 3 rows */
-.is-archive .months:has(a:nth-child(n+17)){ grid-template-rows: repeat(3, auto); }
-
-/* Stream */
-.is-archive .story{ display: grid; gap: var(--space); }
-.is-archive .story figure{ margin: 0; }
+/* Stream grid + media */
+.is-archive .story{ display:grid; gap: var(--space); }
+.is-archive .story figure{ margin:0; }
 .is-archive .story img,
 .is-archive .story video{
-  width: 100%; height: auto; display: block; border-radius: var(--br);
+  width:100%; height:auto; display:block; border-radius:var(--br);
 }
 
-/* Two-up row (desktop base) */
+/* Two-up pair (desktop) */
 .is-archive .row-2{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap: var(--space);
-  align-items: start;
+  align-items:start;
 }
-.is-archive .row-2 > *{ min-width: 0; }        /* prevent stretch */
-.is-archive .row-2 figcaption{ text-align: center; }
+.is-archive .row-2 > *{ min-width:0; }
+.is-archive .row-2 figcaption{ text-align:center; }
 
-/* Footer */
-.is-archive .footer{ margin-top: 2.25rem; color:#777; font-size:.8125rem; }
-
-/* Make all non-contacts navs plain and not fixed within the archive */
-.is-archive nav:not(.contacts-nav){
-  position: static !important;
-  inset: auto !important;
-  width: auto;
-}
-.is-archive nav:not(.contacts-nav) a[href]{
-  background: transparent !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  color: var(--fg);
-}
-/* Collapse all two-up grids on mobile */
-.row-2,
-.project-pair {
-  grid-template-columns: 1fr !important;
-  gap: .5rem; /* tweak if you want tighter/looser */
+/* Footer with hairline rule, content width */
+.is-archive .footer{
+  margin-top: 2.25rem;
+  color:#777;
+  font-size:.8125rem;
+  border-top: .5px solid #000;
+  padding-top: 1rem;
 }
 
 

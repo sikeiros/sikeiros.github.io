@@ -1,34 +1,19 @@
 ---
 layout: base
 ---
-{% comment %} Build newest→oldest list of items {% endcomment %}
+{% comment %} entries newest → oldest {% endcomment %}
 {% assign entries = site.archive | sort: "date" | reverse %}
 
-{% comment %} Determine the year to show (latest item’s year) {% endcomment %}
+{% comment %} Latest year; build a 12-month window starting from AUG of that year {% endcomment %}
 {% assign latest = entries | first %}
 {% assign year   = latest.date | date: "%Y" %}
 
-{% comment %} Make a set of year-month labels that actually exist (e.g., 2025-09) {% endcomment %}
-{% assign present = "" | split: "" %}
-{% for item in entries %}
-  {% assign ym = item.date | date: "%Y-%m" %}
-  {% unless present contains ym %}
-    {% assign present = present | push: ym %}
-  {% endunless %}
-{% endfor %}
+{% comment %} Month sequence: Aug→Dec (this year), then Jan→Jul (next year) {% endcomment %}
+{% assign head = "08,09,10,11,12" | split: "," %}
+{% assign tail = "01,02,03,04,05,06,07" | split: "," %}
+{% assign months = head | concat: tail %}
 
-{% comment %} Build a 12-month ribbon for that year (Dec→Jan so newest is first) {% endcomment %}
-{% assign months = "12,11,10,09,08,07,06,05,04,03,02,01" | split: "," %}
-
-<main>
-  <h1>Archive</h1>
-
-  {% comment %} Full-year ribbon for latest year (Dec→Jan), interleaved per column {% endcomment %}
-{% assign entries = site.archive | sort: "date" | reverse %}
-{% assign latest  = entries | first %}
-{% assign year    = latest.date | date: "%Y" %}
-
-{% assign months  = "12,11,10,09,08,07,06,05,04,03,02,01" | split: "," %}
+{% comment %} Compute which YYYY-MM actually exist {% endcomment %}
 {% assign present = "" | split: "" %}
 {% for it in entries %}
   {% assign ym = it.date | date: "%Y-%m" %}
@@ -37,47 +22,46 @@ layout: base
   {% endunless %}
 {% endfor %}
 
-<nav class="months" aria-label="Months">
-  {% assign first_done = false %}
-  {% for i in (0..5) %}
-    {% assign m_top = months | slice: i, 1 | first %}
-    {% assign m_bot_index = i | plus: 6 %}
-    {% assign m_bot = months | slice: m_bot_index, 1 | first %}
+<main>
+  <h1>Archive</h1>
 
-    {%- assign ym_top = year | append: "-" | append: m_top -%}
-    {%- assign label_top = year | append: "/" | append: m_top -%}
-    {% if present contains ym_top %}
-      <a href="#{{ ym_top }}"{% unless first_done %} aria-current="true"{% assign first_done = true %}{% endunless %}>{{ label_top }}</a>
-    {% else %}
-      <span aria-disabled="true">{{ label_top }}</span>
-    {% endif %}
+  <nav class="months" aria-label="Months">
+    {% assign first_done = false %}
+    {% for i in (0..5) %}
+      {% assign m_top = months | slice: i, 1 | first %}
+      {% assign m_bot = months | slice: i | plus: 6 | slice: 0, 1 | first %}
 
-    {%- assign ym_bot = year | append: "-" | append: m_bot -%}
-    {%- assign label_bot = year | append: "/" | append: m_bot -%}
-    {% if present contains ym_bot %}
-      <a href="#{{ ym_bot }}"{% unless first_done %} aria-current="true"{% assign first_done = true %}{% endunless %}>{{ label_bot }}</a>
-    {% else %}
-      <span aria-disabled="true">{{ label_bot }}</span>
-    {% endif %}
-  {% endfor %}
-</nav>
+      {% assign ym_top   = year | append: "-" | append: m_top %}
+      {% assign label_t  = year | append: "/" | append: m_top %}
+      {% if present contains ym_top %}
+        <a href="#{{ ym_top }}"{% unless first_done %} aria-current="true"{% assign first_done = true %}{% endunless %}>{{ label_t }}</a>
+      {% else %}
+        <span aria-disabled="true">{{ label_t }}</span>
+      {% endif %}
 
+      {% assign ym_bot   = year | append: "-" | append: m_bot %}
+      {% assign label_b  = year | append: "/" | append: m_bot %}
+      {% if present contains ym_bot %}
+        <a href="#{{ ym_bot }}">{{ label_b }}</a>
+      {% else %}
+        <span aria-disabled="true">{{ label_b }}</span>
+      {% endif %}
+    {% endfor %}
+  </nav>
 
-  {% comment %} Stream grouped by month, newest→oldest (matches your old HTML) {% endcomment %}
+  {% comment %} STREAM grouped by month, but no visible month headings {% endcomment %}
   {% assign current = "" %}
   {% for item in entries %}
-    {% assign month_id    = item.date | date: "%Y-%m" %}
-    {% assign month_label = item.date | date: "%Y/%m" %}
+    {% assign month_id = item.date | date: "%Y-%m" %}
 
     {% if month_id != current %}
       {% if current != "" %}</div></div>{% endif %}
       <div id="{{ month_id }}" class="month">
-        <h2>{{ month_label }}</h2>
         <div class="story">
       {% assign current = month_id %}
     {% endif %}
 
-    {{ item.output }}
+    {{ item.output }}   {# render with its layout so title/intro/figure appear #}
 
   {% endfor %}
   {% if current != "" %}</div></div>{% endif %}

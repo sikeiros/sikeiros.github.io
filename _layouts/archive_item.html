@@ -2,6 +2,9 @@
 layout: null
 ---
 <article>
+  {% comment %} exact date chip (dd/mm/yy) {% endcomment %}
+  <div class="date-chip">{{ page.date | date: "%d/%m/%y" }}</div>
+
   {% if page.title %}<h3 class="entry-title">{{ page.title }}</h3>{% endif %}
   {% if page.intro %}<p class="entry-intro">{{ page.intro }}</p>{% endif %}
 
@@ -12,5 +15,5 @@ layout: null
     </figure>
   {% endif %}
 
-  {{ content }}  <!-- put your two-up block (and any extra text) here -->
+  {{ content }}  <!-- e.g., your two-up <div class="row-2">…</div> -->
 </article>
