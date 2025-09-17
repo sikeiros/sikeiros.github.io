@@ -574,12 +574,12 @@ html.is-archive body{
 .is-archive .months{
   position: static !important;
   display: grid;
-  grid-auto-flow: column;                      /* fill top→bottom by columns */
-  grid-template-rows: repeat(2, auto);         /* two rows */
-  grid-auto-columns: 1fr;
-  justify-content: stretch;
-  gap: .5rem 1rem;                             /* row gap | column gap */
+  grid-template-columns: repeat(6, 1fr);   /* ← six equal columns */
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;         /* two rows */
+  justify-items: end;                          /* row gap | column gap */
   align-items: start;
+  gap: .5rem 1rem;   
   width: 100%;                                    /* 👈 span full width of main */
   box-sizing: border-box;
 }
@@ -587,6 +587,7 @@ html.is-archive body{
 /* Normalize link + placeholder typography (same look) */
 .is-archive .months a,
 .is-archive .months span{
+  display: block;
   text-decoration: none;
   color: var(--fg);
   letter-spacing: .02em;
