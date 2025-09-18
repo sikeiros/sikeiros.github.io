@@ -505,10 +505,10 @@ body{ font-weight: 500; }
 
 /* knobs & frame */
 html.is-archive{
-  /* FRAME at 1080 → 67.5rem; CONTENT target ≈ 860px → 53.75rem */
-  --frame:   67.5rem;
-  --content: 53.75rem;
-  --space:   1.25rem;
+  --content: 70rem;                    /* ≈1120px */
+  --gutter:  3.6rem;                   /* side padding ≈64px */
+  --frame:   calc(var(--content) + 2*var(--gutter));
+  --space:   1.25rem;                  /* ≈20px base spacing */
 
   --fg:#111;
   --muted:#777;
