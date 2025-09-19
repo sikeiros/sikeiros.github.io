@@ -522,7 +522,7 @@ html.is-archive body{
   color: var(--fg);
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   line-height: 1.55;
-  font-size: 1.9167rem;                 /* ≈30.7px (23pt) */
+  font-size: 1.70rem;                 /* ≈30.7px (23pt) */
 }
 
 /* Sizes per spec (at 1080) — expressed in rem so they scale */
@@ -533,7 +533,7 @@ html.is-archive body{
 }
 .is-archive .months a,
 .is-archive .months span{                 /* month ribbon: 18pt ≈ 24px */
-  font-size: 1.5rem;
+  font-size: 1.20rem;
 }
 .is-archive .date-chip{                   /* exact day tag: 23pt (body size) */
   display:inline-block;
