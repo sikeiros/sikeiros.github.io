@@ -505,10 +505,9 @@ body{ font-weight: 500; }
 
 /* knobs & frame */
 html.is-archive{
-  --content: 70rem;                    /* ≈1120px */
-  --gutter:  3.6rem;                   /* side padding ≈64px */
-  --frame:   calc(var(--content) + 2*var(--gutter));
-  --space:   1.25rem;                  /* ≈20px base spacing */
+  --frame:   67.5rem;
+  --content: 53.75rem;
+  --space:   1.25rem;
 
   --fg:#111;
   --muted:#777;
@@ -523,7 +522,7 @@ html.is-archive body{
   color: var(--fg);
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   line-height: 1.55;
-  font-size: 1rem;                 /* ≈30.7px (23pt) */
+  font-size: 1.9167rem;                 /* ≈30.7px (23pt) */
 }
 
 /* Sizes per spec (at 1080) — expressed in rem so they scale */
@@ -571,7 +570,7 @@ html.is-archive body{
 /* ===== DESKTOP/TABLET (≥900px) ===== */
 @media (min-width:900px){
   /* make 1rem scale so --frame == viewport width at 1080 */
-  html.is-archive{ font-size: calc(100vw / 61); }
+  html.is-archive{ font-size: calc(100vw / 67.5); }
 
   .is-archive main{
     width: var(--frame);
@@ -596,7 +595,7 @@ html.is-archive body{
     padding-inline: 1rem;
   }
 
-  .is-archive h1{ margin: 0 0 .7em; }
+  .is-archive h1{ margin: 0 0 .35em; }
   .is-archive .row-2{ grid-template-columns: 1fr; } /* two-up → one column */
 }
 
@@ -657,3 +656,5 @@ html.is-archive body{
 }
 
 
+.is-archive main{ outline:1px dashed hotpink; }
+.is-archive .story, .is-archive .months{ outline:1px dashed lightblue; }
