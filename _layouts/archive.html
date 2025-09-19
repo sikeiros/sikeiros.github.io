@@ -5,22 +5,24 @@ layout: base
 {% assign entries = site.archive | sort: "date" | reverse %}
 {% assign latest  = entries | first %}
 {% assign start_y = latest.date | date: "%Y" | plus: 0 %}
-{% assign start_m = latest.date | date: "%m" | plus: 0 %}
+{% assign start_m = latest.date | date: "%m"  | plus: 0 %}
 
-{% comment %} Build 12 labels from current month, rolling into next year {% endcomment %}
+{% comment %}
+Build a 12-month window starting from the current month (based on newest item),
+rolling into next year if needed. NO divided_by/modulo used.
+{% endcomment %}
 {% assign months = "" | split: "" %}
 {% for i in (0..11) %}
-  {% assign idx = start_m | plus: i | minus: 1 %}
-  {% assign mod = idx | modulo: 12 %}
-  {% assign m = mod | plus: 1 %}
-  {% assign y = start_y | plus: (idx | divided_by: 12) %}
-
-  {% if m < 10 %}
-    {% assign m_str = '0' | append: m %}
+  {% assign raw = start_m | plus: i %}
+  {% if raw > 12 %}
+    {% assign y = start_y | plus: 1 %}
+    {% assign m = raw | minus: 12 %}
   {% else %}
-    {% assign m_str = m %}
+    {% assign y = start_y %}
+    {% assign m = raw %}
   {% endif %}
 
+  {% if m < 10 %}{% assign m_str = '0' | append: m %}{% else %}{% assign m_str = m %}{% endif %}
   {% assign ym = y | append: '-' | append: m_str %}
   {% assign months = months | push: ym %}
 {% endfor %}
@@ -37,47 +39,49 @@ layout: base
 <main>
   <h1>Archive</h1>
 
-  <nav class="months" aria-label="Months">
-    {% assign first_done = false %}
-  {% for i in (0..5) %}
-    {% assign top = months | slice: i, 1 | first %}
-    {% assign bot = months | slice: i | plus: 6 | slice: 0, 1 | first %}
+  {# Ribbon: 2 rows × 6 cols, interleaved so it reads row-wise #}
+  <div class="content">
+    <nav class="months" aria-label="Months">
+      {% assign first_done = false %}
+      {% for i in (0..5) %}
+        {% assign top = months | slice: i, 1 | first %}
+        {% assign bot = months | slice: i | plus: 6 | slice: 0, 1 | first %}
 
-    {% assign top_label = top | replace: '-', '/' %}
-    {% if present contains top %}
-      <a href="#{{ top }}"{% unless first_done %} aria-current="true"{% assign first_done = true %}{% endunless %}>{{ top_label }}</a>
-    {% else %}
-      <span aria-disabled="true">{{ top_label }}</span>
-    {% endif %}
+        {% assign top_label = top | replace: '-', '/' %}
+        {% if present contains top %}
+          <a href="#{{ top }}"{% unless first_done %} aria-current="true"{% assign first_done = true %}{% endunless %}>{{ top_label }}</a>
+        {% else %}
+          <span aria-disabled="true">{{ top_label }}</span>
+        {% endif %}
 
-    {% assign bot_label = bot | replace: '-', '/' %}
-    {% if present contains bot %}
-      <a href="#{{ bot }}">{{ bot_label }}</a>
-    {% else %}
-      <span aria-disabled="true">{{ bot_label }}</span>
-    {% endif %}
-  {% endfor %}
-  </nav>
+        {% assign bot_label = bot | replace: '-', '/' %}
+        {% if present contains bot %}
+          <a href="#{{ bot }}">{{ bot_label }}</a>
+        {% else %}
+          <span aria-disabled="true">{{ bot_label }}</span>
+        {% endif %}
+      {% endfor %}
+    </nav>
 
-  {% comment %} STREAM grouped by month, but no visible month headings {% endcomment %}
-  {% assign current = "" %}
-  {% for item in entries %}
-    {% assign month_id = item.date | date: "%Y-%m" %}
+    {% comment %} STREAM grouped by month (no visible month headings) {% endcomment %}
+    {% assign current = "" %}
+    {% for item in entries %}
+      {% assign month_id = item.date | date: "%Y-%m" %}
+      {% if month_id != current %}
+        {% if current != "" %}</div></div>{% endif %}
+        <div id="{{ month_id }}" class="month">
+          <div class="story">
+        {% assign current = month_id %}
+      {% endif %}
 
-    {% if month_id != current %}
-      {% if current != "" %}</div></div>{% endif %}
-      <div id="{{ month_id }}" class="month">
-        <div class="story">
-      {% assign current = month_id %}
-    {% endif %}
+      {{ item.output }}
 
-    {{ item.output }}   
+    {% endfor %}
+    {% if current != "" %}</div></div>{% endif %}
 
-  {% endfor %}
-  {% if current != "" %}</div></div>{% endif %}
-
-  <div class="footer">
-    This is a live archive of works, thoughts, screenshots. Nothing final, the process.
-    Code: MIT. Text &amp; images: CC BY-NC-ND 4.0.
+    <div class="footer">
+      This is a live archive of works, thoughts, screenshots. Nothing final, the process.
+      Code: MIT. Text &amp; images: CC BY-NC-ND 4.0.
+    </div>
   </div>
 </main>
