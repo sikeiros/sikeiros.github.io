@@ -522,7 +522,7 @@ html.is-archive body{
   color: var(--fg);
   font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   line-height: 1.55;
-  font-size: 1.70rem;                 /* ≈30.7px (23pt) */
+  font-size: 1.55rem;                 /* ≈30.7px (23pt) */
 }
 
 /* Sizes per spec (at 1080) — expressed in rem so they scale */
@@ -531,10 +531,48 @@ html.is-archive body{
   margin: 0 0 .3em;
   text-align: center;
 }
-.is-archive .months a,
-.is-archive .months span{                 /* month ribbon: 18pt ≈ 24px */
-  font-size: 1.20rem;
+
+/* fixed 6 columns, 2 rows; fill content width */
+.is-archive .months{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
+  gap: .5rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+
+  justify-items: stretch;  /* stretch cells to column width */
 }
+.is-archive .months a,
+.is-archive .months span{
+  display: block;
+  font-size: 1.20rem;      /* your chosen ribbon size */
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+/* clickable vs placeholder */
+.is-archive .months a{ opacity: .35; }
+.is-archive .months a[aria-current="true"]{ opacity: 1; }
+.is-archive .months span{ opacity: .25; pointer-events: none; }
+
+/* text alignment per column:
+   col 1 → left (items 1&2), cols 2–5 → center, col 6 → right (items 11&12) */
+.is-archive .months :nth-child(1),
+.is-archive .months :nth-child(2){ text-align: left; }
+
+.is-archive .months :nth-child(11),
+.is-archive .months :nth-child(12){ text-align: right; }
+
+.is-archive .months :not(:nth-child(1)):not(:nth-child(2))
+                          :not(:nth-child(11)):not(:nth-child(12)){
+  text-align: center;
+}
+
+
 .is-archive .date-chip{                   /* exact day tag: 23pt (body size) */
   display:inline-block;
   background:#1EFFF0;
@@ -542,6 +580,7 @@ html.is-archive body{
   padding:.15em .35em;
   line-height:1;                          /* snug chip */
   margin: 0 0 .5em;
+  font-size: .95em;
 }
 .is-archive .entry-title{                 /* post title: 28pt ≈ 37.3px */
   font-size: 2rem;
@@ -581,7 +620,7 @@ html.is-archive body{
     margin: 0 auto 6rem;
   }
 
-  .is-archive .months{ margin: 0 0 2rem; }
+  
 }
 
 /* ===== MOBILE/TABLET (≤899.98px) ===== */
