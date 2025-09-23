@@ -9,7 +9,7 @@ layout: base
 
 {% comment %}
 Build a 12-month window starting from the current month (based on newest item),
-rolling into next year if needed. NO divided_by/modulo used.
+rolling into next year if needed.
 {% endcomment %}
 {% assign months = "" | split: "" %}
 {% for i in (0..11) %}
@@ -22,7 +22,11 @@ rolling into next year if needed. NO divided_by/modulo used.
     {% assign m = raw %}
   {% endif %}
 
-  {% if m < 10 %}{% assign m_str = '0' | append: m %}{% else %}{% assign m_str = m %}{% endif %}
+  {% if m < 10 %}
+    {% assign m_str = '0' | append: m %}
+  {% else %}
+    {% assign m_str = m %}
+  {% endif %}
   {% assign ym = y | append: '-' | append: m_str %}
   {% assign months = months | push: ym %}
 {% endfor %}
@@ -39,14 +43,11 @@ rolling into next year if needed. NO divided_by/modulo used.
 <main>
   <h1>Archive</h1>
 
-  {# Ribbon: 2 rows × 6 cols, interleaved so it reads row-wise #}
   <div class="content">
     <nav class="months" aria-label="Months">
       {% assign first_done = false %}
       {% for i in (0..5) %}
         {% assign top = months | slice: i, 1 | first %}
-        {% assign bot = months | slice: i | plus: 6 | slice: 0, 1 | first %}
-
         {% assign top_label = top | replace: '-', '/' %}
         {% if present contains top %}
           <a href="#{{ top }}"{% unless first_done %} aria-current="true"{% assign first_done = true %}{% endunless %}>{{ top_label }}</a>
@@ -54,6 +55,8 @@ rolling into next year if needed. NO divided_by/modulo used.
           <span aria-disabled="true">{{ top_label }}</span>
         {% endif %}
 
+        {% assign bot_index = i | plus: 6 %}
+        {% assign bot = months | slice: bot_index, 1 | first %}
         {% assign bot_label = bot | replace: '-', '/' %}
         {% if present contains bot %}
           <a href="#{{ bot }}">{{ bot_label }}</a>
