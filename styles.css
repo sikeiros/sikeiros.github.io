@@ -547,7 +547,7 @@ html.is-archive body{
 .is-archive .months a,
 .is-archive .months span{
   display: block;
-  font-size: 1.20rem;      /* your chosen ribbon size */
+  font-size: 1rem;      /* your chosen ribbon size */
   letter-spacing: .02em;
   white-space: nowrap;
   color: var(--fg);
@@ -619,20 +619,6 @@ text-align: center;
   
 }
 
-/* ===== MOBILE/TABLET (≤899.98px) ===== */
-@media (max-width:899.98px){
-  /* keep your existing mobile scale; we’ll tune later */
-  html.is-archive{ font-size: calc(100vw / 17); }
-
-  .is-archive main{
-    width: 20.5rem;
-    margin: 1.5rem auto 3.5rem;
-    padding-inline: 1rem;
-  }
-
-  .is-archive h1{ margin: 0 0 .35em; }
-  .is-archive .row-2{ grid-template-columns: 1fr; } /* two-up → one column */
-}
 
 /* ===== Components ===== */
 
@@ -643,7 +629,7 @@ text-align: center;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(2, auto);
   grid-auto-flow: column;                 /* fill top→bottom per column */
-  justify-items: end;                     /* labels hug right edge of cells */
+  justify-items: stretch;                     /* labels hug right edge of cells */
   align-items: start;
   gap: .5rem 1rem;
   width: 100%;
@@ -688,6 +674,67 @@ text-align: center;
   font-size:.8125rem;
   border-top: .5px solid #000;
   padding-top: 1rem;
+}
+
+/* ===== ARCHIVE: Mobile layout (≤700px tighter) ===== */
+@media (max-width:700px){
+  html.is-archive{
+    font-size: calc(100vw / 28);  /* smaller base: bigger divisor = smaller text */
+  }
+
+  .is-archive main{
+    width: 100%;
+    margin: 1rem auto 2rem;
+    padding-inline: 1rem;         /* side breathing room */
+  }
+
+  /* Archive page title */
+  .is-archive h1{
+    font-size: 2.4rem;            /* ≈38px at 16px base */
+    margin: 0 0 .4em;
+    text-align: center;
+  }
+
+  /* Months ribbon: 3 cols × 4 rows, smaller text */
+  .is-archive .months{
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, auto);
+    gap: .35rem .75rem;
+    justify-items: stretch;
+  }
+  .is-archive .months a,
+  .is-archive .months span{
+    font-size: 0.9rem;            /* ~14px */
+  }
+
+  /* Body text smaller */
+  .is-archive body{
+    font-size: 1.2rem;            /* ~19px */
+    line-height: 1.45;
+  }
+
+  /* Date chip smaller */
+  .is-archive .date-chip{
+    font-size: 0.85em;
+    padding: .1em .3em;
+  }
+
+  /* Entry title bigger than body */
+  .is-archive .entry-title{
+    font-size: 1.4rem;            /* ~22px */
+    margin: 0 0 .4em;
+  }
+
+  /* Captions smaller */
+  .is-archive .story figcaption{
+    font-size: 0.75rem;           /* ~12px */
+  }
+
+  /* Stack all two-up rows */
+  .is-archive .row-2{
+    grid-template-columns: 1fr;
+    gap: .5rem;
+  }
 }
 
 
