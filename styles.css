@@ -560,16 +560,12 @@ html.is-archive body{
 .is-archive .months span{ opacity: .25; pointer-events: none; }
 
 /* text alignment per column:
-   col 1 → left (items 1&2), cols 2–5 → center, col 6 → right (items 11&12) */
-.is-archive .months :nth-child(1),
-.is-archive .months :nth-child(2){ text-align: left; }
-
-.is-archive .months :nth-child(11),
-.is-archive .months :nth-child(12){ text-align: right; }
-
-.is-archive .months :not(:nth-child(1)):not(:nth-child(2))
-                          :not(:nth-child(11)):not(:nth-child(12)){
-  text-align: center;
+col 1 → left (items 1&2), cols 2–5 → center, col 6 → right (items 11&12) */
+.is-archive .months > :nth-child(-n+2){ text-align: left; }     /* 1,2 */
+.is-archive .months > :nth-child(n+11){ text-align: right; }    /* 11,12 */
+.is-archive .months > :not(:nth-child(-n+2)):not(:nth-child(n+11)){
+    
+text-align: center;
 }
 
 
@@ -580,7 +576,7 @@ html.is-archive body{
   padding:.15em .35em;
   line-height:1;                          /* snug chip */
   margin: 0 0 .5em;
-  font-size: .95em;
+  font-size: .85em;
 }
 .is-archive .entry-title{                 /* post title: 28pt ≈ 37.3px */
   font-size: 2rem;
