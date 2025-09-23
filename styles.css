@@ -532,7 +532,7 @@ html.is-archive body{
   text-align: center;
 }
 
-/* fixed 6 columns, 2 rows; fill content width */
+/* fixed 6 columns, 2 rows; fill content width 
 .is-archive .months{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -542,8 +542,9 @@ html.is-archive body{
   width: 100%;
   box-sizing: border-box;
 
-  justify-items: stretch;  /* stretch cells to column width */
-}
+  justify-items: stretch;   stretch cells to column width 
+} */
+
 .is-archive .months a,
 .is-archive .months span{
   display: block;
@@ -552,7 +553,7 @@ html.is-archive body{
   white-space: nowrap;
   color: var(--fg);
   text-decoration: none;
-  margin-bottom: 1.5rem; 
+ 
 }
 
 /* clickable vs placeholder */
@@ -677,7 +678,7 @@ text-align: center;
   padding-top: 1rem;
 }
 
-/* ===== ARCHIVE: Mobile layout (≤700px tighter) ===== */
+/* ===== ARCHIVE: Mobile layout (≤799px tighter) ===== */
 @media (max-width:799px){
   html.is-archive{
     font-size: calc(100vw / 28);  /* smaller base: bigger divisor = smaller text */
@@ -700,16 +701,20 @@ text-align: center;
   .is-archive .months{
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, auto);
-    gap: .35rem .75rem;
+    grid-auto-flow: column;
     justify-items: stretch;
+    gap: .35rem .75rem;
   }
-  .is-archive .months a,
+
+  
+ /* .is-archive .months a,
   .is-archive .months span{
-    font-size: 0.9rem;            /* ~14px */
-  }
-  .is-archive .months > :nth-child(-n+4){ text-align: left; }   /* 1..4 */
-  .is-archive .months > :nth-child(n+9){  text-align: right; }  /* 9..12 */
-  .is-archive .months > :nth-child(n+5):nth-child(-n+8){ text-align: center; } /* 5..8 */
+    font-size: 0.9rem; 
+    }           ~14px */
+  
+  .is-archive .months > *{ text-align: center; }
+  .is-archive .months > :nth-child(-n+4){ text-align: left; }  /* 1..4 (col 1) */
+  .is-archive .months > :nth-child(n+9){  text-align: right; }
 
 
   /* Body text smaller */
@@ -722,6 +727,7 @@ text-align: center;
   .is-archive .date-chip{
     font-size: 0.85em;
     padding: .1em .3em;
+    margin: .5rem 0 0;
   }
 
   /* Entry title bigger than body */
