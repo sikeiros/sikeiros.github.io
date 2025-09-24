@@ -1,0 +1,132 @@
+---
+---
+
+@import "minimal-mistakes";
+
+html.is-archive{
+  --frame:   67.5rem;          /* 1080 */
+  --content: 53.75rem;         /* ≈860 */
+  --space:   1.25rem;
+  --fg:#111; --muted:#777; --rule:#e7e7e7; --br:12px;
+}
+
+/* Base body (desktop) */
+html.is-archive body{
+  margin: 0; padding: 0;
+  color: var(--fg);
+  font-family: "MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.55;
+  font-size: 1.55rem;                 /* main text size (tweak here) */
+}
+
+/* Big page title */
+.is-archive h1{
+  font-size: 4.9rem;
+  margin: 0 0 .35em;
+  text-align: center;
+}
+
+/* Content frame */
+@media (min-width:900px){
+  html.is-archive{ font-size: calc(100vw / 67.5); }
+  .is-archive main{
+    width: var(--frame);
+    margin: 0 auto 6rem;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .is-archive .content{
+    width: var(--content);
+    margin-inline: auto;
+  }
+}
+
+/* Months ribbon — 6 cols × 2 rows (desktop) */
+.is-archive .months{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
+  gap: .5rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  justify-items: stretch;
+  margin-bottom: 1.25rem;      /* space under ribbon (tweak here) */
+}
+.is-archive .months a,
+.is-archive .months span{
+  display: block;
+  text-decoration: none;
+  color: var(--fg);
+  letter-spacing: .02em;
+  white-space: nowrap;
+  font-size: 1.25rem;          /* ribbon label size (tweak here) */
+  margin: 0;
+}
+.is-archive .months a{ opacity:.35; }
+.is-archive .months a[aria-current="true"]{ opacity: 1; }
+.is-archive .months span{ opacity:.25; pointer-events:none; }
+
+/* Edge-align columns: first col left, last col right */
+.is-archive .months > :nth-child(-n+2){ text-align: left; }
+.is-archive .months > :nth-child(n+11){ text-align: right; }
+
+/* Post anatomy */
+.is-archive .date-chip{
+  display:inline-block;
+  background:#1EFFF0; color:#000;
+  padding:.15em .35em; line-height:1;
+  font-size:.95em;              /* date chip smaller than body */
+  margin-top:.5rem;
+}
+.is-archive .entry-title{
+  font-size: 2.1rem;            /* post title bigger than body */
+  margin: 0 0 .4em;
+}
+.is-archive .entry-intro{ margin: 0 0 .9em; color: var(--muted); }
+
+.is-archive .story{ display:grid; gap: var(--space); }
+.is-archive .story figure{ margin:0; }
+.is-archive .story img, .is-archive .story video{
+  width:100%; height:auto; display:block; border-radius:var(--br);
+}
+.is-archive .story figcaption{ font-size:1.25rem; text-align:center; margin-top:.35em; }
+
+/* Two-up (desktop) */
+.is-archive .row-2{
+  display:grid; grid-template-columns:1fr 1fr; gap: var(--space); align-items:start;
+}
+.is-archive .row-2 > *{ min-width:0; }
+.is-archive article figure + .row-2{ margin-top: var(--space); }
+.is-archive article > * + *{ margin-top: var(--space); }
+
+/* Footer rule */
+.is-archive .footer{
+  margin-top: 2.25rem; color:#777; font-size:.9rem;
+  border-top: .5px solid #000; padding-top: 1rem;
+}
+
+/* Mobile: 3 cols × 4 rows, smaller type */
+@media (max-width:700px){
+  html.is-archive{ font-size: calc(100vw / 28); }
+  .is-archive main{ width:100%; margin:1rem auto 2rem; padding-inline:1rem; }
+  .is-archive .content{ width:100%; margin:0; }
+
+  .is-archive h1{ font-size: 2.4rem; margin: 0 0 .4em; }
+
+  .is-archive .months{
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, auto);
+    gap: .35rem .75rem;
+    justify-items: stretch;
+    margin-bottom: 1rem;
+  }
+  .is-archive .months a, .is-archive .months span{ font-size: .9rem; }
+  .is-archive .months > *{ text-align:left; } /* simplest: all labels left on mobile */
+
+  .is-archive body{ font-size: 1.2rem; line-height:1.45; }
+  .is-archive .date-chip{ font-size: .85em; }
+  .is-archive .entry-title{ font-size: 1.4rem; }
+  .is-archive .story figcaption{ font-size: .75rem; }
+  .is-archive .row-2{ grid-template-columns: 1fr; gap: .5rem; }
+}

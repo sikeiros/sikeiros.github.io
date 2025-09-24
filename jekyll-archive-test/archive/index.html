@@ -1,0 +1,100 @@
+---
+layout: default
+title: Archive
+permalink: /jekyll-archive-test/archive/
+html_class: is-archive
+---
+
+{% assign entries = site.posts | sort: "date" | reverse %}
+{% assign latest  = entries | first %}
+{% assign start_y = latest.date | date: "%Y" | plus: 0 %}
+{% assign start_m = latest.date | date: "%m"  | plus: 0 %}
+
+{% comment %} Build 12 months starting at current month (no division/modulo) {% endcomment %}
+{% assign months = "" | split: "" %}
+{% for i in (0..11) %}
+  {% assign raw = start_m | plus: i %}
+  {% if raw > 12 %}
+    {% assign y = start_y | plus: 1 %}
+    {% assign m = raw | minus: 12 %}
+  {% else %}
+    {% assign y = start_y %}
+    {% assign m = raw %}
+  {% endif %}
+  {% if m < 10 %}{% assign m_str = '0' | append: m %}{% else %}{% assign m_str = m %}{% endif %}
+  {% assign ym = y | append: '-' | append: m_str %}
+  {% assign months = months | push: ym %}
+{% endfor %}
+
+{% comment %} Which months have posts? {% endcomment %}
+{% assign present = "" | split: "" %}
+{% for it in entries %}
+  {% assign ym_it = it.date | date: "%Y-%m" %}
+  {% unless present contains ym_it %}
+    {% assign present = present | push: ym_it %}
+  {% endunless %}
+{% endfor %}
+
+<main>
+  <h1>Archive</h1>
+
+  <div class="content">
+    <!-- Month ribbon (6×2 interleaved) -->
+    <nav class="months" aria-label="Months">
+      {% assign first_done = false %}
+      {% for i in (0..5) %}
+        {% assign top = months | slice: i, 1 | first %}
+        {% assign top_label = top | replace: '-', '/' %}
+        {% if present contains top %}
+          <a href="#{{ top }}"{% unless first_done %} aria-current="true"{% assign first_done = true %}{% endunless %}>{{ top_label }}</a>
+        {% else %}
+          <span aria-disabled="true">{{ top_label }}</span>
+        {% endif %}
+
+        {% assign bot_index = i | plus: 6 %}
+        {% assign bot = months | slice: bot_index, 1 | first %}
+        {% assign bot_label = bot | replace: '-', '/' %}
+        {% if present contains bot %}
+          <a href="#{{ bot }}">{{ bot_label }}</a>
+        {% else %}
+          <span aria-disabled="true">{{ bot_label }}</span>
+        {% endif %}
+      {% endfor %}
+    </nav>
+
+    <!-- Stream grouped by month -->
+    {% assign current = "" %}
+    {% for post in entries %}
+      {% assign month_id = post.date | date: "%Y-%m" %}
+
+      {% if month_id != current %}
+        {% if current != "" %}</div></div>{% endif %}
+        <div id="{{ month_id }}" class="month">
+          <div class="story">
+        {% assign current = month_id %}
+      {% endif %}
+
+      <article>
+        <div class="date-chip">{{ post.date | date: "%d/%m/%y" }}</div>
+        {% if post.title %}<h3 class="entry-title">{{ post.title }}</h3>{% endif %}
+        {% if post.intro %}<p class="entry-intro">{{ post.intro }}</p>{% endif %}
+
+        {% if post.figure %}
+          <figure>
+            <img src="{{ post.figure | replace: 'SITE_BASEURL', site.baseurl }}" alt="{{ post.alt | default: '' }}">
+            {% if post.caption %}<figcaption>{{ post.caption }}</figcaption>{% endif %}
+          </figure>
+        {% endif %}
+
+        {{ post.content }}
+      </article>
+
+    {% endfor %}
+    {% if current != "" %}</div></div>{% endif %}
+
+    <div class="footer">
+      This is a live archive of works, thoughts, screenshots. Nothing final, the process.
+      Code: MIT. Text &amp; images: CC BY-NC-ND 4.0.
+    </div>
+  </div>
+</main>

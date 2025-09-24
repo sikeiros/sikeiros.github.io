@@ -1,0 +1,24 @@
+title: Jekyll Archive Test
+url: "https://anyadanilova.com"
+baseurl: "/jekyll-archive-test"
+
+remote_theme: "mmistakes/minimal-mistakes"
+
+plugins:
+  - jekyll-include-cache
+
+# Minimal Mistakes basics
+minimal_mistakes_skin: default
+paginate: 0
+
+# We’ll use regular posts (site.posts) for the archive test
+# Images: keep them anywhere; reference with {{ site.baseurl }}/path.ext
+
+# SEO (optional)
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: false
