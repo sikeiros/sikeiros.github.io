@@ -8,7 +8,6 @@ htmlClass: is-archive
 {% set latest = collections.postsByMonth | first %}
 
 {% if latest %}
-  <!-- Redirect to newest month: /archive/posts/YYYY-MM/ -->
   <meta http-equiv="refresh" content="0; url={{ ('/posts/' + latest.ym + '/') | url }}">
   <main class="content">
     <p>Redirecting to {{ latest.ym | monthLabel }}…</p>
