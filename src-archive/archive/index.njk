@@ -1,0 +1,12 @@
+---
+layout: base
+permalink: "/archive/"
+eleventyExcludeFromCollections: true
+---
+
+{% set latest = collections.postsByMonth | first %}
+<meta http-equiv="refresh" content="0; url=/archive/{{ latest.ym }}/">
+<main class="content">
+  <p>Redirecting to {{ latest.ym | monthLabel }}…</p>
+  <p><a href="/archive/{{ latest.ym }}/">Click here if not redirected.</a></p>
+</main>

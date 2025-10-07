@@ -1,0 +1,185 @@
+@font-face{
+  font-family: "MyExperimentalSans-Mono";
+  src: url("https://delightful-bienenstitch-d126bb.netlify.app/myexperimentalsans-mono.woff") format("woff");
+  font-weight: 400;      /* ← set to the file’s real weight; use 500 if it’s actually 500 */
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ========== Desktop archive ========== */
+html.is-archive{
+  /* FRAME + CONTENT
+     - Frame is the “design width” (1080px)
+     - Content is the inner column (860px)
+     - Keep content < frame
+  */
+  --frame:   67.5rem;      /* 1080 / 16  */
+  --content: 53.75rem;     /*  860 / 16  */
+  --space:   1.25rem;
+
+  /* colors */
+  --fg:#111; --muted:#777; --rule:#e7e7e7; --br:12px;
+
+  /* Make the frame FLUID like your main site:
+     1rem = viewportWidth / 67.5 → 67.5rem == 100vw
+     => frame hugs the viewport, side margins don't “breathe” anymore.
+  */
+  font-size: calc(100vw / 67.5);
+}
+
+html.is-archive body{
+  margin:0; color:var(--fg);
+  font-family:"MyExperimentalSans-Mono", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height:1.5;
+  font-size:1.4rem;              /* main body size at the frame */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-weight:400;                /* lighten appearance if your file is boldish */
+}
+
+/* Title */
+.is-archive h1{
+  font-size:3.8rem;
+  margin:0 0 .05em;
+  text-align:center;
+  font-weight: 400;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Widths: frame wraps everything; content centers the column */
+.is-archive main{ width:var(--frame); margin:0 auto 6rem; }
+.is-archive .content{ width:var(--content); margin-inline:auto; }
+
+  
+  /* Months ribbon */
+  .is-archive .months{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows:auto;
+    grid-auto-flow: row;
+    justify-items: stretch; 
+    gap:.3rem 4rem;
+    margin: 0 0 2.5rem;
+  }
+  .is-archive .months .month{
+    /*display: block;
+    justify-self: stretch;    /* item-level stretch (wins over container) */
+    /* width: auto;               no fixed width */
+    /* margin-inline: 0;          remove centering via margins, if present */
+    /* text-align: center;       default: centered text */
+    text-decoration: none;
+    color: var(--fg);
+    letter-spacing: .02em;
+    white-space: nowrap;
+    font-size: 1rem;                   /* adjust if needed */
+  }
+  
+  /* Clickable months (months that have posts) */
+.is-archive .months a.month{
+  color: #000;            /* black */
+  opacity: 1;             /* fully opaque */
+  text-decoration: none;
+}
+.is-archive .months a.month[aria-current="true"]{
+  color: #1EFFF0;
+  text-decoration: none;
+  pointer-events: none;
+}
+.is-archive .months a.month:hover,
+.is-archive .months a.month:focus-visible{
+  text-decoration: underline;      /* underline on hover/focus */
+  text-underline-offset: .12em;
+}
+
+/* Placeholders (no posts yet) */
+.is-archive .months span.month[aria-disabled="true"]{
+  color: #000;
+  opacity: .30;           /* greyed */
+  pointer-events: none;
+}
+
+  
+  /* Optional: “More” button bar (hidden for now) */
+  .is-archive .months-more{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+
+
+  /* Entry anatomy */
+  .is-archive .chip{
+    display:inline-block; background:#1EFFF0; color:#000;
+    padding:.15em .45em; font-size:1rem;
+  }
+  
+  .is-archive .entry-title{ font-size:1.8rem; margin:.35em 0 0.4em; }
+  .is-archive .entry-title + p,
+  .is-archive .entry-title + ul,
+  .is-archive .entry-title + ol,
+  .is-archive .entry-title + blockquote{
+    margin-top: 0;  /* was ~1em by default */
+  }
+  /*.is-archive .entry-intro{ color:var(--muted); margin:0 0 .9em; }*/
+  .is-archive figure{ margin:0; }
+  .is-archive img{ width:100%; border-radius:var(--br); }
+  .is-archive figcaption{ font-size:0.8rem; text-align:center; margin:0 0 1em; color:#555; }
+  .chip{ background:#1EFFF0 !important; color:#000; }
+
+  /* Two-up row */
+  .is-archive .row-2{
+    display:grid; grid-template-columns:1fr 1fr; gap:var(--space);
+  }
+  .is-archive .row-2 > *{ min-width:0; }
+  
+  /* Footer */
+  .is-archive .footer{
+    margin-top:4.5rem; color:#777; font-size:.8rem;
+    border-top:.5px solid #000; padding-top:1rem;
+  }
+  
+  /* MOBILE */
+@media (max-width:700px){
+  /* use a slightly smaller base and tighter leading */
+  html.is-archive body{ font-size:2rem; line-height:1.45; }
+
+  /* title smaller */
+  .is-archive h1{ font-size:4rem; margin:0 0 .6rem; }
+
+  /* frame becomes full-bleed with comfy side padding */
+ /* match desktop’s fluid frame + centered column */
+  .is-archive main{ width:var(--frame); margin:1rem auto 2rem; padding-inline:0; }
+  .is-archive .content{ width:var(--content); margin-inline:auto; }
+
+
+  /* months ribbon: 3 cols with tighter gaps */
+  .is-archive .months{
+    grid-template-columns: repeat(4, 1fr);
+    gap:.4rem 7.5rem;
+    margin-bottom: 4rem;
+  }
+  /* smaller month pill text so the grid breathes */
+  .is-archive .months .month{ font-size:1.5rem; }
+
+  /* entries */
+  .is-archive .chip{ font-size:1.5rem; padding:.12em .32em; }
+  .is-archive .entry-title{ font-size:2.5rem; margin:.3em 0 .35em; }
+  .is-archive .entry-intro{ margin:0 0 .7em; }
+  .is-archive figcaption{ font-size:.8rem; }
+
+  /* two-up stacks with small gap */
+  .is-archive .row-2{ grid-template-columns:1fr; gap:.5rem; }
+
+  /* footer spacing smaller */
+  .is-archive .footer{ margin-top:1.25rem; font-size:.9rem; }
+}
+
+/*test2*/
+
+  
+
