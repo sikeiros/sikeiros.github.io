@@ -2,11 +2,11 @@
 layout: base.njk
 
 pagination:
-  data: collections.postsByMonth   # [{ ym, items }]
+  data: collections.postsByMonth     # [{ ym: "YYYY-MM", items: [posts] }]
   size: 1
   alias: group
 
-# Month archive pages under /posts/YYYY-MM/
+# Month page URL = /archive/posts/YYYY-MM/
 permalink: "posts/{{ group.ym }}/"
 
 eleventyComputed:
@@ -16,6 +16,7 @@ eleventyComputed:
 
 <h1>{{ group.ym | monthLabel }}</h1>
 
+<!-- Month ribbon -->
 <nav class="months" aria-label="Months">
   {% for m in collections.postsByMonth %}
     <a class="month"
@@ -26,12 +27,18 @@ eleventyComputed:
   {% endfor %}
 </nav>
 
+<!-- All posts for this month, with full content -->
 <section class="content">
   {% for post in group.items %}
     <article class="entry">
-      <span class="chip">{{ post.date | dateChip }}</span>
-      <h2 class="entry-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
-      {% if post.data.summary %}<p class="entry-intro">{{ post.data.summary }}</p>{% endif %}
+      <time class="chip">{{ post.date | dateChip }}</time>
+      <h2 class="entry-title">
+        <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+      </h2>
+
+      <div class="entry-body">
+        {{ post.templateContent | safe }}
+      </div>
     </article>
   {% endfor %}
 </section>
