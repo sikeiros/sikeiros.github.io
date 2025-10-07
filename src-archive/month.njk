@@ -1,42 +1,56 @@
 ---
 layout: base.njk
 
+# one page per month: /archive/posts/YYYY-MM/
 pagination:
   data: collections.postsByMonth
   size: 1
-  alias: group
+  alias: month
 
-permalink: "posts/{{ group.ym }}/"
+# Month page URL = /archive/posts/YYYY-MM/
+permalink: "posts/{{ month.ym }}/"
 
 eleventyComputed:
-  title: "Archive {{ group.ym | monthLabel }}"
+  title: "Archive {{ month.ym | monthLabel }}"
   htmlClass: "is-archive"
 ---
 
+{# Keep the exact wrapper your CSS expects #}
 <main class="content">
   <h1>Archive</h1>
 
-  <!-- Months ribbon INSIDE .content (so CSS applies) -->
+  {# Build ribbon from the groups we actually have #}
+  {% set groups = collections.postsByMonth %}
+
   <nav class="months" aria-label="Months">
-    {% for g in collections.postsByMonth %}
+    {% for g in groups %}
       <a class="month"
          href="{{ ('/posts/' + g.ym + '/') | url }}"
-         {% if g.ym == group.ym %}aria-current="true"{% endif %}>
+         {% if g.ym == month.ym %}aria-current="true"{% endif %}>
         {{ g.ym | monthLabel }}
       </a>
     {% endfor %}
   </nav>
 
-  <!-- Entries (also inside .content so link styles apply) -->
-  {% for post in group.items %}
-    <article class="entry">
-      <time class="chip">{{ post.date | dateChip }}</time>
-      <h2 class="entry-title">
-        <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-      </h2>
-      <div class="entry-body">
-        {{ post.templateContent | safe }}
-      </div>
-    </article>
-  {% endfor %}
+  {# Entries for this month — full content inline #}
+  {% if month.items and month.items.length %}
+    {% for post in month.items %}
+      <article class="entry">
+        <time class="chip">{{ post.date | dateChip }}</time>
+        <h2 class="entry-title">
+          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+        </h2>
+
+        <div class="entry-body">
+          {{ post.content | safe }} {# Eleventy v3 field name #}
+        </div>
+      </article>
+    {% endfor %}
+  {% else %}
+    <p class="note">No posts in this month yet.</p>
+  {% endif %}
+
+  <div class="footer">
+    This is a live archive of works, thoughts, screenshots. Nothing final, the process.
+  </div>
 </main>
