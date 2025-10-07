@@ -128,7 +128,7 @@ html.is-archive body{
   /*.is-archive .entry-intro{ color:var(--muted); margin:0 0 .9em; }*/
   .is-archive figure{ margin:0; }
   .is-archive img{ width:100%; border-radius:var(--br); }
-  .is-archive figcaption{ font-size:0.8rem; text-align:center; margin:0 0 1em; color:#555; }
+  .is-archive figcaption{ font-size:0.8rem; text-align:center; margin:0 0 5em; color:#555; }
   .chip{ background:#1EFFF0 !important; color:#000; }
 
   /* Two-up row */
