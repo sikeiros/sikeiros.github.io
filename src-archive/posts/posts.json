@@ -1,4 +1,6 @@
 {
-    "layout": "base.njk"
+  "layout": "base.njk",
+  "eleventyComputed": {
+    "htmlClass": "is-archive"
   }
-  
+}
