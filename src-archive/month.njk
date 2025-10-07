@@ -15,34 +15,46 @@ eleventyComputed:
   htmlClass: "is-archive"
 ---
 
-{# Keep the exact wrapper your CSS expects #}
+{# groups = months that actually have posts (newest → oldest) #}
+{% set groups = collections.postsByMonth %}
+
+{# Build a months list like in your local file.
+   If you want disabled months too, we make a full window from the oldest month to newest. #}
+{% set oldest = groups[(groups | length) - 1].ym %}
+{% set months = oldest | monthWindowFixed(groups | length) %}
+
 <main class="content">
   <h1>Archive</h1>
 
-  {# Build ribbon from the groups we actually have #}
-  {% set groups = collections.postsByMonth %}
-
   <nav class="months" aria-label="Months">
-    {% for g in groups %}
-      <a class="month"
-         href="{{ ('/posts/' + g.ym + '/') | url }}"
-         {% if g.ym == month.ym %}aria-current="true"{% endif %}>
-        {{ g.ym | monthLabel }}
-      </a>
+    {% for ym in months %}
+      {# does this ym have posts? #}
+      {% set has = false %}
+      {% for g in groups %}{% if g.ym == ym %}{% set has = true %}{% endif %}{% endfor %}
+
+      {% if has %}
+        <a class="month"
+           href="{{ ('/posts/' + ym + '/') | url }}"
+           {% if ym == month.ym %}aria-current="true"{% endif %}>
+          {{ ym | monthLabel }}
+        </a>
+      {% else %}
+        <span class="month" aria-disabled="true">{{ ym | monthLabel }}</span>
+      {% endif %}
     {% endfor %}
   </nav>
 
-  {# Entries for this month — full content inline #}
   {% if month.items and month.items.length %}
     {% for post in month.items %}
       <article class="entry">
         <time class="chip">{{ post.date | dateChip }}</time>
-        <h2 class="entry-title">
-          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-        </h2>
+
+        {% if post.data.title %}
+          <h3 class="entry-title">{{ post.data.title }}</h3>
+        {% endif %}
 
         <div class="entry-body">
-          {{ post.content | safe }} {# Eleventy v3 field name #}
+          {{ post.content | safe }} {# full post body inline #}
         </div>
       </article>
     {% endfor %}
