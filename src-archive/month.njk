@@ -18,10 +18,8 @@ eleventyComputed:
 {# groups = months that actually have posts (newest → oldest) #}
 {% set groups = collections.postsByMonth %}
 
-{# Build a months list like in your local file.
-   If you want disabled months too, we make a full window from the oldest month to newest. #}
-{% set oldest = groups[(groups | length) - 1].ym %}
-{% set months = oldest | monthWindowFixed(groups | length) %}
+{% set months = month.ym | monthWindowFrom(12, -11) %}
+
 
 <main class="content">
   <h1>Archive</h1>
