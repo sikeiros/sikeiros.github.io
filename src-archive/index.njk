@@ -1,6 +1,6 @@
 ---
-layout: base.njk                  # use the actual file name in _includes
-permalink: "/"                    # writes to archive/index.html (NOT archive/archive)
+layout: base.njk
+permalink: "/"
 eleventyExcludeFromCollections: true
 htmlClass: is-archive
 ---
@@ -8,14 +8,12 @@ htmlClass: is-archive
 {% set latest = collections.postsByMonth | first %}
 
 {% if latest %}
-  {# use the url filter so pathPrefix '/archive/' is added in production #}
-  <meta http-equiv="refresh" content="0; url={{ '/' ~ latest.ym ~ '/' | url }}">
+  <!-- Redirect to newest month: /archive/posts/YYYY-MM/ -->
+  <meta http-equiv="refresh" content="0; url={{ ('/posts/' + latest.ym + '/') | url }}">
   <main class="content">
     <p>Redirecting to {{ latest.ym | monthLabel }}…</p>
-    <p><a href="{{ '/' ~ latest.ym ~ '/' | url }}">Click here if not redirected.</a></p>
+    <p><a href="{{ ('/posts/' + latest.ym + '/') | url }}">Click here if not redirected.</a></p>
   </main>
 {% else %}
-  <main class="content">
-    <p>No posts yet.</p>
-  </main>
+  <main class="content"><p>No posts yet.</p></main>
 {% endif %}
