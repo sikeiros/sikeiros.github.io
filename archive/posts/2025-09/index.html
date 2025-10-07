@@ -12,34 +12,33 @@
 </head>
 <body>
   
-<h1>Archive</h1>
+<main class="content">
+  <h1>Archive</h1>
 
-<!-- Month ribbon -->
-<nav class="months" aria-label="Months">
-  
-    <a class="month"
-       href="/archive/posts/2025-10/"
-       >
-      10/2025
-    </a>
-  
-    <a class="month"
-       href="/archive/posts/2025-09/"
-       aria-current="true">
-      09/2025
-    </a>
-  
-</nav>
+  <!-- Months ribbon INSIDE .content (so CSS applies) -->
+  <nav class="months" aria-label="Months">
+    
+      <a class="month"
+         href="/archive/posts/2025-10/"
+         >
+        10/2025
+      </a>
+    
+      <a class="month"
+         href="/archive/posts/2025-09/"
+         aria-current="true">
+        09/2025
+      </a>
+    
+  </nav>
 
-<!-- All posts for this month, with full content -->
-<section class="content">
+  <!-- Entries (also inside .content so link styles apply) -->
   
     <article class="entry">
       <time class="chip">19/09/2025</time>
       <h2 class="entry-title">
         <a href="/archive/posts/2025-09/2025-09-15-test/">September process2</a>
       </h2>
-
       <div class="entry-body">
         <figure>
       <img src="/archive/posts/2025-09/img/rezak-01.png" alt="Alt text for img 01" loading="lazy">
@@ -69,7 +68,6 @@
       <h2 class="entry-title">
         <a href="/archive/posts/2025-09/2025-09-10-double-spread/">Test first post</a>
       </h2>
-
       <div class="entry-body">
         <div class="row-2">
   <figure>
@@ -85,7 +83,7 @@
       </div>
     </article>
   
-</section>
+</main>
 
 </body>
 </html>

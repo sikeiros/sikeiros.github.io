@@ -2,11 +2,10 @@
 layout: base.njk
 
 pagination:
-  data: collections.postsByMonth     # [{ ym: "YYYY-MM", items: [posts] }]
+  data: collections.postsByMonth
   size: 1
   alias: group
 
-# Month page URL = /archive/posts/YYYY-MM/
 permalink: "posts/{{ group.ym }}/"
 
 eleventyComputed:
@@ -14,31 +13,30 @@ eleventyComputed:
   htmlClass: "is-archive"
 ---
 
-<h1>Archive</h1>
+<main class="content">
+  <h1>Archive</h1>
 
-<!-- Month ribbon -->
-<nav class="months" aria-label="Months">
-  {% for m in collections.postsByMonth %}
-    <a class="month"
-       href="{{ ('/posts/' + m.ym + '/') | url }}"
-       {% if m.ym == group.ym %}aria-current="true"{% endif %}>
-      {{ m.ym | monthLabel }}
-    </a>
-  {% endfor %}
-</nav>
+  <!-- Months ribbon INSIDE .content (so CSS applies) -->
+  <nav class="months" aria-label="Months">
+    {% for g in collections.postsByMonth %}
+      <a class="month"
+         href="{{ ('/posts/' + g.ym + '/') | url }}"
+         {% if g.ym == group.ym %}aria-current="true"{% endif %}>
+        {{ g.ym | monthLabel }}
+      </a>
+    {% endfor %}
+  </nav>
 
-<!-- All posts for this month, with full content -->
-<section class="content">
+  <!-- Entries (also inside .content so link styles apply) -->
   {% for post in group.items %}
     <article class="entry">
       <time class="chip">{{ post.date | dateChip }}</time>
       <h2 class="entry-title">
         <a href="{{ post.url | url }}">{{ post.data.title }}</a>
       </h2>
-
       <div class="entry-body">
         {{ post.templateContent | safe }}
       </div>
     </article>
   {% endfor %}
-</section>
+</main>
