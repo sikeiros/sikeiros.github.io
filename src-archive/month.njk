@@ -32,7 +32,7 @@ permalink: "posts/{{ month.ym }}/"
 
         {% if has %}
           <a class="month"
-             href="{{ ('/posts/' + ym + '/') | url }}"
+             href="{{ ('/posts/' + ym + '/') }}"
              {% if ym == month.ym %}aria-current="true"{% endif %}>
             {{ ym | monthLabel }}
           </a>

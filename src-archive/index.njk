@@ -9,10 +9,10 @@ htmlClass: is-archive
 
 {% if latest %}
   <!-- Redirect to newest month: /archive/posts/YYYY-MM/ -->
-  <meta http-equiv="refresh" content="0; url={{ ('/posts/' + latest.ym + '/') | url }}">
+  <meta http-equiv="refresh" content="0; url={{ ('/posts/' + latest.ym + '/') }}">
   <main class="content">
     <p>Redirecting to {{ latest.ym | monthLabel }}…</p>
-    <p><a href="{{ ('/posts/' + latest.ym + '/') | url }}">Click here if not redirected.</a></p>
+    <p><a href="{{ ('/posts/' + latest.ym + '/') }}">Click here if not redirected.</a></p>
   </main>
 {% else %}
   <main class="content"><p>No posts yet.</p></main>

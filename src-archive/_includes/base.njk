@@ -1,16 +1,19 @@
 <!doctype html>
 <html lang="en" class="{{ htmlClass | default('') }}">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ title or "Archive" }}</title>
-  <link rel="stylesheet" href="/archive/assets/styles.css">
-  <link rel="preload"
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{{ title or "Archive" }}</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <link
+      rel="preload"
       href="https://delightful-bienenstitch-d126bb.netlify.app/myexperimentalsans-mono.woff"
-      as="font" type="font/woff" crossorigin>
-
-</head>
-<body>
-  {{ content | safe }}
-</body>
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
+  </head>
+  <body>
+    {{ content | safe }}
+  </body>
 </html>
