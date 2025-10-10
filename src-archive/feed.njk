@@ -1,0 +1,38 @@
+---json
+{
+  "permalink": "feed.atom",
+  "eleventyExcludeFromCollections": true,
+  "metadata": {
+    "language": "en",
+    "title": "Archive",
+    "description": "Archive",
+    "base": "https://anyadanilova.com/",
+    "author": {
+      "name": "Anya Danilova",
+      "email": "hello@anyadanilova.com"
+    }
+  }
+}
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ metadata.language or page.lang }}">
+  <title>{{ metadata.title }}</title>
+  <subtitle>{{ metadata.description }}</subtitle>
+  <link href="{{ permalink | htmlBaseUrl(metadata.base) }}" rel="self" />
+  <link href="{{ metadata.base | addPathPrefixToFullUrl }}" />
+  <updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ metadata.base | addPathPrefixToFullUrl }}</id>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+  </author>
+  {%- for group in collections.postsByMonth | reverse %}
+  {%- set absolutePostUrl %}{{ group.url | htmlBaseUrl(metadata.base) }}{% endset %}
+  <entry>
+    <title>{{ group.items[0].data.title }}</title>
+    <link href="{{ absolutePostUrl }}" />
+    <updated>{{ group.date | dateToRfc3339 }}</updated>
+    <id>{{ absolutePostUrl }}</id>
+    <content type="html">{{ group.items[0].content | renderTransforms(group.items[0].data.page, metadata.base) }}</content>
+  </entry>
+  {%- endfor %}
+</feed>
