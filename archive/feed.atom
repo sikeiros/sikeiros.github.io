@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-  <title>Archive</title>
-  <subtitle>Archive</subtitle>
+  <title>Anya Danilova Archive</title>
+  <subtitle>Archive of thoughts, things, process</subtitle>
   <link href="https://anyadanilova.com/archive/feed.atom" rel="self" />
   <link href="https://anyadanilova.com/archive/" />
-  <updated>2025-10-09T19:08:28Z</updated>
+  <updated>2025-10-14T15:38:41Z</updated>
   <id>https://anyadanilova.com/archive/</id>
   <author>
     <name>Anya Danilova</name>
