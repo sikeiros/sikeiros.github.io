@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" class="is-archive">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{{ title or "Archive" }}</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <link
+      rel="preload"
+      href="https://delightful-bienenstitch-d126bb.netlify.app/myexperimentalsans-mono.woff"
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
+  </head>
+  <body>
+    {% set months = "2025-09" | monthWindowFixed(12) %}
+
+    <main>
+      <h1>Archive</h1>
+
+      <div class="content">
+        <nav class="months" aria-label="Months">
+          {% for ym in months %}
+            {% set has = false %}
+            {% for g in collections.postsByMonth %}{% if g.ym == ym %}{% set has = true %}{% endif %}{% endfor %}
+
+            {% if has %}
+              <a class="month"
+                 href="{{ ('/posts/' + ym + '/') }}"
+                 {% if ym == month.ym %}aria-current="true"{% endif %}>
+                {{ ym | monthLabel }}
+              </a>
+            {% else %}
+              <span class="month" aria-disabled="true">{{ ym | monthLabel }}</span>
+            {% endif %}
+          {% endfor %}
+        </nav>
+      </div>
+
+      <div class="content">
+        <article>
+          <div class="chip">{{ date | dateChip }}</div>
+
+          {% if title %}
+            <h3 class="entry-title">{{ title }}</h3>
+          {% endif %}
+
+          {% if intro %}
+            <p class="entry-intro">{{ intro }}</p>
+          {% endif %}
+
+          {% if figure %}
+            <figure>
+              <img src="{{ figure }}" alt="">
+              {% if post.data.caption %}
+                <figcaption>{{ caption }}</figcaption>
+              {% endif %}
+            </figure>
+          {% endif %}
+
+          {{ content | safe }}
+        </article>
+        <div class="footer">This is a live archive of works, thoughts, screenshots. Nothing final, the process.</div>
+      </div>
+    </main>
+  </body>
+</html>
