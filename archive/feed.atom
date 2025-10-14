@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-  <title>Archive</title>
-  <subtitle>Archive</subtitle>
+  <title>Anya Danilova Archive</title>
+  <subtitle>Archive of thoughts, things, process</subtitle>
   <link href="https://anyadanilova.com/archive/feed.atom" rel="self" />
   <link href="https://anyadanilova.com/archive/" />
-  <updated>2025-10-09T19:08:28Z</updated>
+  <updated>2025-10-07T00:00:00Z</updated>
   <id>https://anyadanilova.com/archive/</id>
   <author>
     <name>Anya Danilova</name>
+    <email>hello@anyadanilova.com</email>
+    <uri>https://anyadanilova.com/</uri>
   </author>
   <entry>
+    <title>October. Me, Myself and AI</title>
+    <link href="https://anyadanilova.com/archive/posts/2025-10/2025-10-07/" />
+    <updated>2025-10-07T00:00:00Z</updated>
+    <id>https://anyadanilova.com/archive/posts/2025-10/2025-10-07/</id>
+    <content type="html">&lt;p&gt;In August I asked ChatGPT for a life advice. One of the life advices was to create a blog for myself but open if people want to see. What could go wrong, what can be simpler, right?&lt;/p&gt;
+&lt;p&gt;So, after two months of me being pseudo-developer and screaming and uppercasing at ChatGPT,behold. This is a blog that I made on the basis of 11ty, without no particular need or reason. But it is out there now. I&#39;ll try to post pictures and stories that happened during the month, so I could trick myself into thinking that I actually do something valuable.&lt;/p&gt;
+&lt;p&gt;So that people could leave this blog/archive faster, I put my experimental sans(not an official name) in the works. In parallel, I work on it and persuade myself that it also makes sense.&lt;/p&gt;
+&lt;figure&gt;
+      &lt;img src=&quot;https://anyadanilova.com/archive/posts/2025-10/img/1-10.png&quot; alt=&quot;Alt text for img 01&quot; loading=&quot;lazy&quot;&gt;
+      &lt;figcaption&gt;Hey, funky!&lt;/figcaption&gt;
+    &lt;/figure&gt;
+&lt;p&gt;Now that I think I made it all work -ish, I&#39;m going to write more about how much fun I had with Rezak Armenian (that&#39;s sarcasm, I don&#39;t understand how I&#39;ll publish it) and how simple it was to create a website and a blog on GitHub Pages (that&#39;s sarcasm, but hey, I only spent around a month of my time on this and 20 bucks on ChatGPT, I guess I don&#39;t need people anymore!)&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>September start</title>
-    <link href="https://anyadanilova.com/archive/posts/2025-09/" />
-    <updated>2025-09-01T00:00:00Z</updated>
-    <id>https://anyadanilova.com/archive/posts/2025-09/</id>
+    <link href="https://anyadanilova.com/archive/posts/2025-09/2025-09-15/" />
+    <updated>2025-09-15T00:00:00Z</updated>
+    <id>https://anyadanilova.com/archive/posts/2025-09/2025-09-15/</id>
     <content type="html">&lt;p&gt;Originally I was supposed to start in August, but oh well. Here&#39;s my highlights of September as I remember them. Working on my website with ChatGPT was fun, Rezak Armenian Extrabold is a disaster, Rezak Armenian Black is a fun disaster, script for Rezak Black Incised always gives me weird good pics.&lt;/p&gt;
 &lt;figure&gt;
       &lt;img src=&quot;https://anyadanilova.com/archive/posts/2025-09/img/1.png&quot; alt=&quot;Alt 1&quot; loading=&quot;lazy&quot;&gt;
@@ -31,21 +48,6 @@
       &lt;img src=&quot;https://anyadanilova.com/archive/posts/2025-09/img/4.png&quot; alt=&quot;Alt 4&quot; loading=&quot;lazy&quot;&gt;
       &lt;figcaption&gt;It may look better than the actual final letters&lt;/figcaption&gt;
     &lt;/figure&gt;
-</content>
-  </entry>
-  <entry>
-    <title>October. Me, Myself and AI</title>
-    <link href="https://anyadanilova.com/archive/posts/2025-10/" />
-    <updated>2025-10-01T00:00:00Z</updated>
-    <id>https://anyadanilova.com/archive/posts/2025-10/</id>
-    <content type="html">&lt;p&gt;In August I asked ChatGPT for a life advice. One of the life advices was to create a blog for myself but open if people want to see. What could go wrong, what can be simpler, right?&lt;/p&gt;
-&lt;p&gt;So, after two months of me being pseudo-developer and screaming and uppercasing at ChatGPT,behold. This is a blog that I made on the basis of 11ty, without no particular need or reason. But it is out there now. I&#39;ll try to post pictures and stories that happened during the month, so I could trick myself into thinking that I actually do something valuable.&lt;/p&gt;
-&lt;p&gt;So that people could leave this blog/archive faster, I put my experimental sans(not an official name) in the works. In parallel, I work on it and persuade myself that it also makes sense.&lt;/p&gt;
-&lt;figure&gt;
-      &lt;img src=&quot;https://anyadanilova.com/archive/posts/2025-10/img/1-10.png&quot; alt=&quot;Alt text for img 01&quot; loading=&quot;lazy&quot;&gt;
-      &lt;figcaption&gt;Hey, funky!&lt;/figcaption&gt;
-    &lt;/figure&gt;
-&lt;p&gt;Now that I think I made it all work -ish, I&#39;m going to write more about how much fun I had with Rezak Armenian (that&#39;s sarcasm, I don&#39;t understand how I&#39;ll publish it) and how simple it was to create a website and a blog on GitHub Pages (that&#39;s sarcasm, but hey, I only spent around a month of my time on this and 20 bucks on ChatGPT, I guess I don&#39;t need people anymore!)&lt;/p&gt;
 </content>
   </entry>
 </feed>
