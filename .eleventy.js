@@ -76,6 +76,8 @@ module.exports = async function (eleventyConfig) {
     }));
   });
 
+  eleventyConfig.addCollection("posts", (api) => api.getFilteredByGlob("src-archive/posts/**/*.md"));
+
   eleventyConfig.addShortcode(
     "fig",
     function (filename, alt = "", caption = "") {
