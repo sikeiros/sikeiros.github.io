@@ -9,7 +9,8 @@
     "base": "https://anyadanilova.com/",
     "author": {
       "name": "Anya Danilova",
-      "email": "hello@anyadanilova.com"
+      "email": "hello@anyadanilova.com",
+      "uri": "https://anyadanilova.com/"
     }
   }
 }
@@ -24,15 +25,16 @@
   <id>{{ metadata.base | addPathPrefixToFullUrl }}</id>
   <author>
     <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+    <uri>{{ metadata.author.uri }}</uri>
   </author>
-  {%- for group in collections.postsByMonth | reverse %}
-  {%- set absolutePostUrl %}{{ group.url | htmlBaseUrl(metadata.base) }}{% endset %}
+  {%- for post in collections.posts | reverse %}
   <entry>
-    <title>{{ group.items[0].data.title }}</title>
-    <link href="{{ absolutePostUrl }}" />
-    <updated>{{ group.date | dateToRfc3339 }}</updated>
-    <id>{{ absolutePostUrl }}</id>
-    <content type="html">{{ group.items[0].content | renderTransforms(group.items[0].data.page, metadata.base) }}</content>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ post.url | htmlBaseUrl(metadata.base) }}" />
+    <updated>{{ post.data.date | dateToRfc3339 }}</updated>
+    <id>{{ post.url | htmlBaseUrl(metadata.base) }}</id>
+    <content type="html">{{ post.content | renderTransforms(post.page, metadata.base) }}</content>
   </entry>
   {%- endfor %}
 </feed>
