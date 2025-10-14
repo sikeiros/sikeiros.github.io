@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>{{ title or "Archive" }}</title>
     <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="alternate" type="application/atom+xml" title="Anya Danilova Archive" href="https://anyadanilova.com/archive/feed.atom">
     <link
       rel="preload"
       href="https://delightful-bienenstitch-d126bb.netlify.app/myexperimentalsans-mono.woff"
@@ -12,6 +13,12 @@
       type="font/woff"
       crossorigin
     />
+    <script
+      defer
+      async
+      src="https://a.ya.codes/script.js"
+      data-website-id="e16f5666-6465-400b-8e69-8bb0f9732ebc"
+    ></script>
   </head>
   <body>
     {% set months = "2025-09" | monthWindowFixed(12) %}
