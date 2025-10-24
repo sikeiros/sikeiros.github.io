@@ -132,10 +132,15 @@ html.is-archive body{
   .chip{ background:#1EFFF0 !important; color:#000; }
 
   /* Two-up row */
-  .is-archive .row-2{
-    display:grid; grid-template-columns:1fr 1fr; gap:var(--space);
+  .is-archive .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space);
   }
-  .is-archive .row-2 > *{ min-width:0; }
+  
+  .is-archive .row > * {
+    min-width: 0;
+  }
   
   /* Footer */
   .is-archive .footer{
@@ -143,9 +148,7 @@ html.is-archive body{
     border-top:.5px solid #000; padding-top:1rem;
   }
 
-  .row {
-    display: flex;
-  }
+
 
   
   /* MOBILE */
@@ -178,15 +181,13 @@ html.is-archive body{
   .is-archive figcaption{ font-size:.8rem; }
 
   /* two-up stacks with small gap */
-  .is-archive .row-2{ grid-template-columns:1fr; gap:.5rem; }
+  .is-archive .row{ grid-template-columns:1fr; gap:.5rem; }
 
   /* footer spacing smaller */
   .is-archive .footer{ margin-top:1.25rem; font-size:.9rem; }
 }
 
-  .row {
-    display: block;  
-  }
+
 /*test2*/
 
   
