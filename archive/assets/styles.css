@@ -132,11 +132,11 @@ html.is-archive body{
   .chip{ background:#1EFFF0 !important; color:#000; }
 
   /* Two-up row */
-  .is-archive .row {
-    display:grid; grid-template-columns:1fr 1fr; gap:var(--space);
+  .row {
+    display:grid; grid-template-columns:1fr 1fr; gap:var(--space, 1rem);
   }
   
-  .is-archive .row > * {
+  .row > * {
     min-width: 0;
   }
   
@@ -179,7 +179,7 @@ html.is-archive body{
   .is-archive figcaption{ font-size:.8rem; }
 
   /* two-up stacks with small gap */
-  .is-archive .row{ grid-template-columns:1fr; gap:.5rem; }
+  .row{ grid-template-columns:1fr; gap:.5rem; }
 
   /* footer spacing smaller */
   .is-archive .footer{ margin-top:1.25rem; font-size:.9rem; }
