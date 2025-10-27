@@ -133,12 +133,24 @@ html.is-archive body{
 
   /* Two-up row */
   .row {
-    display:grid; grid-template-columns:1fr 1fr; gap:var(--space, 1rem);
+    display:flex;
+    flex-wrap: wrap;                  /* allow wrapping on narrow columns */
+    gap: var(1rem);
+    align-items: flex-start;
   }
   
-  .row > * {
+  .row > figure{
+    flex: 1 1 0;   /* equal distribution */
     min-width: 0;
+    margin: 0;     /* reset default figure margins */
   }
+
+  .row img{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
   
   /* Footer */
   .is-archive .footer{
@@ -179,7 +191,15 @@ html.is-archive body{
   .is-archive figcaption{ font-size:.8rem; }
 
   /* two-up stacks with small gap */
-  .row{ grid-template-columns:1fr; gap:.5rem; }
+  @media (max-width: 700px) {
+    .row {
+      flex-direction: column;   /* 👈 turns it into a vertical list */
+    }
+    .row > figure {
+      flex: none;               /* disable equal-width rule */
+      width: 100%;
+    }
+  }
 
   /* footer spacing smaller */
   .is-archive .footer{ margin-top:1.25rem; font-size:.9rem; }
