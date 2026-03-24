@@ -5,42 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio</title>
   <meta name="robots" content="noindex, nofollow">
+  
+  <link rel="stylesheet" href="/styles.css">
+
   <style>
-    html, body {
+    html,
+    body {
       margin: 0;
       height: 100%;
-      font-family: sans-serif;
       background: white;
     }
 
-    .topbar {
+    .portfolio-page {
+      height: 100%;
+    }
+
+    .portfolio-topbar {
       position: fixed;
-      top: 16px;
-      left: 16px;
-      z-index: 10;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
     }
 
-    .button {
+    .portfolio-back {
       display: inline-block;
-      padding: 10px 14px;
-      background: black;
-      color: white;
+      padding: 8px 12px;
       text-decoration: none;
-      border-radius: 999px;
-      font-size: 14px;
+      border: 1px solid currentColor;
+      background: white;
     }
 
-    .pdf {
+    .portfolio-back:hover {
+      opacity: 0.6;
+    }
+
+    .portfolio-pdf {
       width: 100%;
       height: 100vh;
       border: none;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <a class="button" href="/">Back to website</a>
-  </div>
+  <div class="portfolio-page">
+    <div class="portfolio-topbar">
+      <a href="/" class="portfolio-back">Back to website</a>
+    </div>
 
   <iframe class="pdf" src="A-Danilova-Portfolio.pdf"></iframe>
 </body>
