@@ -17,54 +17,24 @@
 
 
 
+
 <main>
   <h1>Archive</h1>
 
  <div class="content">
-    <nav class="months" aria-label="Months">
+        <nav class="months" aria-label="Archive months and years">
       
         
         
+          
         
-
+          
         
-          <a class="month" href="/archive/posts/2025-09/">
-            09/2025
-          </a>
+          
         
-      
+          
         
-        
-        
-
-        
-          <a class="month" href="/archive/posts/2025-10/">
-            10/2025
-          </a>
-        
-      
-        
-        
-        
-
-        
-          <a class="month" href="/archive/posts/2025-11/">
-            11/2025
-          </a>
-        
-      
-        
-        
-        
-
-        
-          <a class="month" href="/archive/posts/2025-12/">
-            12/2025
-          </a>
-        
-      
-        
-        
+          
         
 
         
@@ -73,6 +43,17 @@
       
         
         
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
         
 
         
@@ -83,6 +64,15 @@
       
         
         
+          
+        
+          
+        
+          
+        
+          
+        
+          
         
 
         
@@ -91,6 +81,15 @@
       
         
         
+          
+        
+          
+        
+          
+        
+          
+        
+          
         
 
         
@@ -99,6 +98,15 @@
       
         
         
+          
+        
+          
+        
+          
+        
+          
+        
+          
         
 
         
@@ -107,6 +115,15 @@
       
         
         
+          
+        
+          
+        
+          
+        
+          
+        
+          
         
 
         
@@ -115,6 +132,15 @@
       
         
         
+          
+        
+          
+        
+          
+        
+          
+        
+          
         
 
         
@@ -123,12 +149,133 @@
       
         
         
+          
+        
+          
+        
+          
+        
+          
+        
+          
         
 
         
           <span class="month" aria-disabled="true">08/2026</span>
         
       
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        
+          <span class="month" aria-disabled="true">09/2026</span>
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        
+          <span class="month" aria-disabled="true">10/2026</span>
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        
+          <span class="month" aria-disabled="true">11/2026</span>
+        
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+        
+          <span class="month" aria-disabled="true">12/2026</span>
+        
+      
+
+      <div class="archive-year-row" style="grid-column: 1 / -1; display: flex; justify-content: flex-end;">
+  <button type="button" class="month archive-year archive-more" id="archive-more" aria-controls="archive-years" hidden="">More</button>
+
+  <div id="archive-years">
+    
+    
+      
+      
+    
+      
+      
+        <a class="month archive-year" href="/archive/posts/2025-12/">2025</a>
+        
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </div>
+</div>
+<script>
+  (() => {
+    const button = document.getElementById("archive-more");
+    const years = document.getElementById("archive-years");
+    const firstYear = years.querySelector("a");
+    if (!firstYear) return;
+
+    years.hidden = true;
+    button.hidden = false;
+
+    button.addEventListener("click", () => {
+      years.hidden = false;
+      button.hidden = true;
+      firstYear.focus();
+    });
+  })();
+</script>
     </nav>
   </div>
 

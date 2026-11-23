@@ -18,21 +18,25 @@ permalink: "posts/{{ month.ym }}/"
 {# Fixed start exactly like your local test:
    always begin at 2025-09 and show 12 months (2 rows × 6 cols).
    This yields: 09/2025 10/2025 11/2025 ... left → right. #}
-{% set months = "2025-09" | monthWindowFixed(12) %}
+{% set year = month.ym.slice(0, 4) %}
+{% set months = (year ~ "-01") | monthWindowFixed(12) %}
 
 <main>
   <h1>Archive</h1>
 
  <div class="content">
-    <nav class="months" aria-label="Months">
+        <nav class="months" aria-label="Archive months and years">
       {% for ym in months %}
-        {# does this month have posts? #}
         {% set has = false %}
-        {% for g in groups %}{% if g.ym == ym %}{% set has = true %}{% endif %}{% endfor %}
+        {% for g in groups %}
+          {% if g.ym == ym %}
+            {% set has = true %}
+          {% endif %}
+        {% endfor %}
 
         {% if has %}
           <a class="month"
-             href="{{ ('/posts/' + ym + '/') }}"
+             href="{{ '/posts/' ~ ym ~ '/' }}"
              {% if ym == month.ym %}aria-current="true"{% endif %}>
             {{ ym | monthLabel }}
           </a>
@@ -40,6 +44,39 @@ permalink: "posts/{{ month.ym }}/"
           <span class="month" aria-disabled="true">{{ ym | monthLabel }}</span>
         {% endif %}
       {% endfor %}
+
+      <div class="archive-year-row" style="grid-column: 1 / -1; display: flex; justify-content: flex-end;">
+  <button type="button" class="month archive-year archive-more"
+        id="archive-more" aria-controls="archive-years" hidden>More</button>
+
+  <div id="archive-years">
+    {% set shownYears = [year] %}
+    {% for g in groups %}
+      {% set groupYear = g.ym.slice(0, 4) %}
+      {% if groupYear not in shownYears %}
+        <a class="month archive-year" href="{{ '/posts/' ~ g.ym ~ '/' }}">{{ groupYear }}</a>
+        {% set shownYears = shownYears.concat([groupYear]) %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<script>
+  (() => {
+    const button = document.getElementById("archive-more");
+    const years = document.getElementById("archive-years");
+    const firstYear = years.querySelector("a");
+    if (!firstYear) return;
+
+    years.hidden = true;
+    button.hidden = false;
+
+    button.addEventListener("click", () => {
+      years.hidden = false;
+      button.hidden = true;
+      firstYear.focus();
+    });
+  })();
+</script>
     </nav>
   </div>
 
