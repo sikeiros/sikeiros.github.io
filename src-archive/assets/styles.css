@@ -165,7 +165,7 @@ html.is-archive body{
   .row {
     display:flex;
     flex-wrap: wrap;                  /* allow wrapping on narrow columns */
-    gap: var(1rem);
+    gap: 0.5rem;
     align-items: flex-start;
   }
   
@@ -226,6 +226,7 @@ html.is-archive body{
   @media (max-width: 700px) {
     .row {
       flex-direction: column;   /* 👈 turns it into a vertical list */
+      row-gap: 0.1rem;
     }
     .row > figure {
       flex: none;               /* disable equal-width rule */
